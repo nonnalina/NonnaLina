@@ -3,171 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nonna Lina | Cucina Italiana</title>
+    <title>Nonna Lina | Authentic Italian Cuisine</title>
     <style>
+        :root {
+            --italian-red: #CD212A;
+            --italian-green: #008C45;
+            --cream: #F9F6F0;
+            --charcoal: #2B2B2B;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
             line-height: 1.6;
-            color: #2b2b2b;
-            background-color: #fbf9f3; /* Warm parchment color matching the logo background */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
+
         .container {
-            width: 90%;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 40px 20px;
             text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        header {
-            padding: 40px 0 20px 0;
+
+        /* Logo Styling */
+        .logo-container {
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 220px;
         }
-        .logo-img {
-            max-width: 100%;
-            width: 380px;
+
+        .logo-container img {
+            width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto;
         }
-        main {
-            flex: 1;
-            padding: 20px 0 40px 0;
-        }
-        .coming-soon-badge {
-            display: inline-block;
-            background-color: #008C45; /* Italian Flag Green */
-            color: #fff;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-        }
-        .hero-text {
-            font-size: 2rem;
+
+        h1 {
+            font-size: 2.5rem;
             margin-bottom: 15px;
-            color: #8D1D24; /* Elegant red matching the logo text */
+            color: var(--charcoal);
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        .intro {
-            font-size: 1.15rem;
-            color: #4a4a4a;
-            margin-bottom: 30px;
+
+        .tagline {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 40px;
             font-style: italic;
         }
-        .menu-preview {
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e6dec9;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+
+        /* Accent Line */
+        .divider {
+            height: 4px;
+            width: 60px;
+            background: linear-gradient(to right, var(--italian-green) 33%, #FFF 33%, #FFF 66%, var(--italian-red) 66%);
+            margin: 0 auto 40px auto;
         }
-        .menu-preview h2 {
-            font-size: 1.3rem;
-            color: #008C45;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .menu-items {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
-        }
-        .contact-card {
+
+        .info-box {
             background: #ffffff;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06);
-            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
             width: 100%;
-            max-width: 450px;
-            border-top: 4px solid #8D1D24;
         }
-        .contact-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: #222;
-        }
-        .title-sub {
-            font-size: 0.95rem;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        .contact-item {
-            margin: 14px 0;
+
+        .info-box p {
             font-size: 1.1rem;
+            margin-bottom: 15px;
         }
-        .contact-item a {
-            color: #222;
+
+        /* Clickable Email Button */
+        .email-link {
+            display: inline-block;
+            background-color: var(--charcoal);
+            color: #ffffff;
             text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
             font-weight: 600;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            margin-top: 10px;
         }
-        .contact-item a:hover {
-            color: #8D1D24;
+
+        .email-link:hover {
+            background-color: var(--italian-red);
+            transform: translateY(-1px);
         }
+
         footer {
-            padding: 30px 0;
-            font-size: 0.85rem;
-            color: #999;
-            border-top: 1px solid #eaeaea;
-            background: #f4f0e6;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #888;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <!-- This will load image.png from your main folder -->
-            <img src="image.png" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" onerror="this.src='image.PNG'; this.onerror=this.src='Image.png';">
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="Square.svg" alt="Nonna Lina Logo">
         </div>
-    </header>
 
-    <main>
-        <div class="container">
-            <div class="coming-soon-badge">Opening Soon in Central Florida</div>
+        <h1>Nonna Lina</h1>
+        <div class="divider"></div>
+        <p class="tagline">Something delicious is simmering.</p>
+
+        <div class="info-box">
+            <p>We are currently crafting our digital home to bring the true taste of Italy straight to you.</p>
+            <p>For inquiries, bookings, or private events, reach out to us directly:</p>
             
-            <h1 class="hero-text">A Taste of Italy is on the Way</h1>
-            <p class="intro">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
-            
-            <div class="menu-preview">
-                <h2>Our Specialties</h2>
-                <p class="menu-items">
-                    Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
-                    Fresh Salads • Gourmet Panini • Sicilian Cannoli
-                </p>
-            </div>
-            
-            <div class="contact-card">
-                <h3>Francesco D’Angelo</h3>
-                <p class="title-sub">General Manager</p>
-                
-                <div class="contact-item">
-                    📞 <a href="tel:+14075369155">407.536.9155</a>
-                </div>
-                <div class="contact-item">
-                    📧 <a href="mailto:francesco@nonnalina.us">francesco@nonnalina.us</a>
-                </div>
-            </div>
+            <!-- Contact Email -->
+            <a href="mailto:Francesco@NonnaLina.us" class="email-link">Francesco@NonnaLina.us</a>
         </div>
-    </main>
+    </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
-        </div>
+        &copy; 2026 Nonna Lina. All Rights Reserved.
     </footer>
 
 </body>
