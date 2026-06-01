@@ -119,19 +119,21 @@
             color: #ffffff;
         }
         .story-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease;
+            display: none; /* Hidden completely until clicked */
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
             background-color: #ffffff;
             border-radius: 0 0 12px 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        /* Class added dynamically via JavaScript when open */
-        .story-content.is-open {
-            padding: 35px 30px;
             border: 1px solid #e6dec9;
             border-top: none;
             margin-top: -5px; /* Smooth join with button */
+            padding: 35px 30px;
+        }
+        /* Class added dynamically via JavaScript when open */
+        .story-content.is-open {
+            display: block; /* Takes up natural height automatically */
+            opacity: 1;
         }
         .story-toggle-btn.is-active {
             border-radius: 12px 12px 0 0;
@@ -166,7 +168,7 @@
         }
         .story-body blockquote {
             font-style: italic;
-            border-left: 3px solid #008C45; /* Green accent for the emotional transition */
+            border-left: 3px solid #008C45; /* Green accent */
             margin: 25px 0;
             padding-left: 15px;
             color: #555;
@@ -249,7 +251,6 @@
             
             <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
             
-            <!-- Specialties Panel -->
             <div class="menu-preview">
                 <h2>Our Specialties</h2>
                 <p class="menu-items">
@@ -258,7 +259,6 @@
                 </p>
             </div>
             
-            <!-- NEW Elegant Accordion Dropdown for Our Story -->
             <div class="story-container">
                 <button id="toggleStoryBtn" class="story-toggle-btn">
                     Read Our Story <span id="storyArrow">&#9662;</span>
@@ -290,7 +290,6 @@
                 </div>
             </div>
             
-            <!-- Contact Card -->
             <div class="contact-card">
                 <h3>Francesco D’Angelo</h3>
                 <p class="title-sub">General Manager</p>
@@ -311,24 +310,25 @@
         </div>
     </footer>
 
-    <!-- Script to run the Accordion Toggle dynamic expansion -->
     <script>
         const toggleBtn = document.getElementById("toggleStoryBtn");
         const content = document.getElementById("storyContent");
         const arrow = document.getElementById("storyArrow");
 
         toggleBtn.addEventListener("click", function() {
-            // Toggle active visual classes
             toggleBtn.classList.toggle("is-active");
-            content.classList.toggle("is-open");
             
-            if (content.classList.contains("is-open")) {
-                // Set height dynamically based on content size for a smooth CSS slide animation
-                content.style.maxHeight = content.scrollHeight + 70 + "px";
-                arrow.innerHTML = "&#9652;"; // Turn arrow up
+            if (!content.classList.contains("is-open")) {
+                content.style.display = "block";
+                // Short timeout gives browser time to process display block layout shift before fading
+                setTimeout(() => {
+                    content.classList.add("is-open");
+                }, 10);
+                arrow.innerHTML = "&#9652;"; // Arrow points up
             } else {
-                content.style.maxHeight = "0";
-                arrow.innerHTML = "&#9662;"; // Turn arrow down
+                content.classList.remove("is-open");
+                content.style.display = "none";
+                arrow.innerHTML = "&#9662;"; // Arrow points down
             }
         });
     </script>
