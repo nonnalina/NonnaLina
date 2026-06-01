@@ -1,3 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nonna Lina | Cucina Italiana</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2b2b2b;
+            background-color: #fbf9f3; /* Warm parchment color matching the logo background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        header {
+            padding: 40px 0 20px 0;
+        }
+        .logo-img {
+            max-width: 100%;
+            width: 380px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        main {
+            flex: 1;
+            padding: 20px 0 40px 0;
+        }
+        .coming-soon-badge {
+            display: inline-block;
+            background-color: #008C45; /* Italian Flag Green */
+            color: #fff;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+        .hero-text {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #8D1D24; /* Elegant red matching the logo text */
+            font-weight: 700;
+        }
+        .intro {
+            font-size: 1.25rem;
+            color: #8D1D24; /* Styled to match the brand color */
+            margin: 5px 0 30px 0;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .description-text {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            margin-bottom: 30px;
+        }
+        .menu-preview {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e6dec9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .menu-preview h2 {
+            font-size: 1.3rem;
+            color: #008C45;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .menu-items {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* --- STYLES FOR THE "OUR STORY" DROPDOWN --- */
+        .story-container {
+            margin-bottom: 35px;
+            text-align: left; /* Text aligns naturally inside the story */
+        }
+        .story-toggle-btn {
+            background: none;
+            border: 2px solid #8D1D24;
+            color: #8D1D24;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .story-toggle-btn:hover {
+            background-color: #8D1D24;
+            color: #ffffff;
+        }
+        .story-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease;
+            background-color: #ffffff;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        /* Class added dynamically via JavaScript when open */
+        .story-content.is-open {
+            padding: 35px 30px;
+            border: 1px solid #e6dec9;
+            border-top: none;
+            margin-top: -5px; /* Smooth join with button */
+        }
+        .story-toggle-btn.is-active {
+            border-radius: 12px 12px 0 0;
+            background-color: #8D1D24;
+            color: #ffffff;
+        }
+        .story-body h2 {
+            font-size: 1.6rem;
+            color: #8D1D24;
+            margin-bottom: 5px;
+            text-align: center;
+            font-family: Georgia, serif;
+        }
+        .story-subtitle {
+            font-style: italic;
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .story-divider {
+            border: 0;
+            height: 1px;
+            background: #e6dec9;
+            margin: 20px 0;
+        }
+        .story-body p {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            color: #333333;
+            line-height: 1.7;
+        }
+        .story-body blockquote {
+            font-style: italic;
+            border-left: 3px solid #008C45; /* Green accent for the emotional transition */
+            margin: 25px 0;
+            padding-left: 15px;
+            color: #555;
+        }
+        .story-highlight {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 25px 0;
+            color: #222;
+        }
+        .story-slogan {
+            text-align: center;
+            font-weight: bold;
+            color: #8D1D24;
+            margin-top: 30px;
+            border-top: 1px solid #e6dec9;
+            padding-top: 20px;
+            font-size: 1.1rem;
+        }
+        /* ------------------------------------------- */
+
+        .contact-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06);
+            display: inline-block;
+            width: 100%;
+            max-width: 450px;
+            border-top: 4px solid #8D1D24;
+        }
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        .title-sub {
+            font-size: 0.95rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .contact-item {
+            margin: 14px 0;
+            font-size: 1.1rem;
+        }
+        .contact-item a {
+            color: #222;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-item a:hover {
+            color: #8D1D24;
+        }
+        footer {
+            padding: 30px 0;
+            font-size: 0.85rem;
+            color: #999;
+            border-top: 1px solid #eaeaea;
+            background: #f4f0e6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="coming-soon-badge">Opening Soon in Central Florida</div>
+            
+            <h1 class="hero-text">A Taste of Italy is on the Way</h1>
+            
+            <p class="intro">“Great food doesn’t need to be complicated - Just real”</p>
+            
+            <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+            
+            <!-- Specialties Panel -->
+            <div class="menu-preview">
+                <h2>Our Specialties</h2>
+                <p class="menu-items">
+                    Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
+                    Fresh Salads • Gourmet Panini • Sicilian Cannoli
+                </p>
+            </div>
+            
+            <!-- NEW Elegant Accordion Dropdown for Our Story -->
+            <div class="story-container">
+                <button id="toggleStoryBtn" class="story-toggle-btn">
+                    Read Our Story <span id="storyArrow">&#9662;</span>
+                </button>
+                
+                <div id="storyContent" class="story-content">
+                    <div class="story-body">
+                        <h2>The Story of Nonna Lina</h2>
+                        <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
+                        
+                        <hr class="story-divider">
+                        
+                        <p>Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
+                        
+                        <p>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
+                        
+                        <p>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
+                        
+                        <blockquote>In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten.</blockquote>
+                        
+                        <p>Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children —to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
+                        
+                        <p class="story-highlight">This is more than a restaurant. <br><strong>It is a tribute.</strong></p>
+                        
+                        <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, honest ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
+                        
+                        <p class="story-slogan">Because great food doesn’t need to be complicated—just real.<br>Just like Nonna Lina.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Card -->
+            <div class="contact-card">
+                <h3>Francesco D’Angelo</h3>
+                <p class="title-sub">General Manager</p>
+                
+                <div class="contact-item">
+                    📞 <a href="tel:+14075369155">407.536.9155</a>
+                </div>
+                <div class="contact-item">
+                    📧 <a href="mailto:Francesco@NonnaLina.us">Francesco@NonnaLina.us</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
+        </div>
+    </footer>
+
     <!-- Script to run the Accordion Toggle dynamic expansion -->
     <script>
         const toggleBtn = document.getElementById("toggleStoryBtn");
@@ -10,8 +323,8 @@
             content.classList.toggle("is-open");
             
             if (content.classList.contains("is-open")) {
-                // Calculate height including standard padding buffers safely
-                content.style.maxHeight = (content.scrollHeight + 100) + "px";
+                // Set height dynamically based on content size for a smooth CSS slide animation
+                content.style.maxHeight = content.scrollHeight + 70 + "px";
                 arrow.innerHTML = "&#9652;"; // Turn arrow up
             } else {
                 content.style.maxHeight = "0";
@@ -19,3 +332,6 @@
             }
         });
     </script>
+
+</body>
+</html>
