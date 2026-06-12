@@ -1,3 +1,5 @@
+Done. Below is the full site code with those three lines removed from the main frame (they remain in the Promise panel only):
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,16 +28,6 @@
       padding: 6px 16px; font-size: 0.9rem; font-weight: bold;
       text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; margin-bottom: 20px;
     }
-    /* Updated hero block styles to show three lines with same size/format */
-    .hero-block { margin-bottom: 15px; }
-    .hero-line {
-      font-size: 2rem;
-      color: #8D1D24;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .hero-line.intro-quote { font-style: italic; font-weight: 500; color: #8D1D24; }
-
     .description-text { font-size: 1.1rem; color: #4a4a4a; margin-bottom: 30px; }
     .menu-preview {
       background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e6dec9;
@@ -89,8 +81,6 @@
     .promise-lines .l3 { color: #333333; font-weight: 400; }
 
     @media (max-width: 480px) {
-      .hero-line { font-size: 1.6rem; }
-      .hero-line.intro-quote { font-size: 1.6rem; }
       .description-text { font-size: 1rem; }
       .story-toggle-btn { padding: 12px; font-size: 1rem; }
       .story-body p { font-size: 1rem; }
@@ -111,12 +101,9 @@
     <div class="container">
       <div class="coming-soon-badge" aria-hidden="true">Opening Soon · Downtown Orlando</div>
 
-      <!-- New top block with three lines matching format/size -->
-      <div class="hero-block" role="heading" aria-level="1">
-        <div class="hero-line">At Nonna Lina · Cucina Italiana</div>
-        <div class="hero-line">We bring classic Italian comfort to every plate.</div>
-        <div class="hero-line">Simple recipes. Quality ingredients. Familiar flavors.</div>
-      </div>
+      <h1 class="hero-text">A Taste of Italy is on the Way</h1>
+
+      <p class="intro">“Great food doesn’t need to be complicated — Just real.”</p>
 
       <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
 
@@ -129,7 +116,6 @@
       </div>
 
       <div class="story-container">
-        <!-- Replaced button label with heading "THE STORY OF NONNA LINA" while keeping the toggle behavior and styling -->
         <button id="toggleStoryBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="storyContent">
           THE STORY OF NONNA LINA <span id="storyArrow" aria-hidden="true">&#9662;</span>
         </button>
@@ -174,11 +160,11 @@
 
             <p><strong>Quality first:</strong> We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.</p>
 
-            <p><strong>Simple recipes:</strong> Our sauces; Alfredo, Marinara, Salsa Rosa, Bolognese, Nonna Lina and Aglio & Olio; are straightforward and crafted to showcase those ingredients.</p>
+            <p><strong>Simple recipes:</strong> Our sauces—Alfredo, Marinara, Salsa Rosa, Nonna Lina, Bolognese and Aglio & Olio—are straightforward and crafted to showcase those ingredients.</p>
 
-            <p><strong>Customizable plates:</strong> Choose a pasta and pair it with proteins and fresh vegetables for a satisfying, familiar meal.</p>
+            <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
 
-            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna, panini, garlic bread bites, soup and salads, plus classic desserts like cannoli and granita.</p>
+            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
 
             <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
 
