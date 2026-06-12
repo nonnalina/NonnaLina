@@ -1,3 +1,12 @@
+Understood — here's the full HTML updated exactly as you asked:
+
+- The promise text is removed from the visible body (only the button remains).
+- The three-line statement is added back, centered at the top of the page in bold.
+- Semicolons in your promise content are preserved (no dashes).
+- The Promise content remains accessible in the collapsible panel (without repeating the top statement).
+
+Paste the entire file below into your project:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +28,14 @@
         .container { width: 90%; max-width: 700px; margin: 0 auto; text-align: center; }
         header { padding: 40px 0 20px 0; }
         .logo-img { max-width: 100%; width: 380px; height: auto; display: block; margin: 0 auto; }
+        .top-statement {
+            font-weight: 700;
+            text-align: center;
+            color: #8D1D24;
+            margin: 12px 0 22px 0;
+            line-height: 1.25;
+            font-size: 1.05rem;
+        }
         main { flex: 1; padding: 20px 0 40px 0; }
         .coming-soon-badge {
             display: inline-block; background-color: #008C45; color: #fff;
@@ -74,6 +91,7 @@
             .intro { font-size: 1rem; }
             .story-toggle-btn { padding: 12px; font-size: 1rem; }
             .story-body p { font-size: 1rem; }
+            .top-statement { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -82,6 +100,10 @@
     <header>
         <div class="container">
             <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
+            <div class="top-statement" role="heading" aria-level="2">
+                <strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
+                Simple recipes. Quality ingredients. Familiar flavors.</strong>
+            </div>
         </div>
     </header>
 
@@ -134,25 +156,24 @@
                     </div>
                 </div>
 
-                <!-- Nonna Lina Promise (new) -->
+                <!-- Nonna Lina Promise button only; content will appear when clicked but top statement is not repeated -->
                 <button id="togglePromiseBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="promiseContent" style="margin-top:16px;">
                     The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
                 </button>
 
-                <!-- Promise content WITHOUT repeating the opening summary line in the body -->
-                <div id="promiseContent" class="story-content" aria-hidden="true">
+                <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
                     <div class="story-body">
                         <h2>The Nonna Lina Promise</h2>
 
                         <hr class="story-divider">
 
-                        <p><strong>Quality first:</strong> Imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach, broccoli—ensure authentic flavor.</p>
+                        <p><strong>Quality first:</strong> We use imported pasta and premium ingredients; Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli; to ensure authentic flavor.</p>
 
-                        <p><strong>Simple recipes:</strong> Our sauces — Alfredo, Marinara, Salsa Rosa, Nonna Lina, Bolognese, and Aglio & Olio — are straightforward and crafted to showcase those ingredients.</p>
+                        <p><strong>Simple recipes:</strong> Our sauces; Alfredo, Marinara, Salsa Rosa, Nonna Lina, Bolognese and Aglio & Olio; are straight forward and crafted to showcase those ingredients.</p>
 
-                        <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken, or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
+                        <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
 
-                        <p><strong>Italian favorites:</strong> Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli, salads, plus classic desserts like cannoli and granita.</p>
+                        <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
 
                         <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
 
@@ -182,7 +203,6 @@
     </footer>
 
     <script>
-        // Generic toggle function to avoid repeating the summary header when opening promise:
         function setupToggle(buttonId, contentId, arrowId) {
             const btn = document.getElementById(buttonId);
             const content = document.getElementById(contentId);
@@ -194,18 +214,16 @@
                 btn.setAttribute('aria-expanded', String(!isOpen));
 
                 if (!isOpen) {
+                    content.hidden = false;
                     content.style.display = "block";
                     setTimeout(() => content.classList.add("is-open"), 10);
                     content.setAttribute('aria-hidden', 'false');
                     arrow.innerHTML = "&#9652;";
-
-                    // If this is the Promise section, ensure we do not duplicate the initial one-line summary
-                    // (The summary line is intentionally not included inside the promise body.)
                 } else {
                     content.classList.remove("is-open");
                     content.setAttribute('aria-hidden', 'true');
                     arrow.innerHTML = "&#9662;";
-                    setTimeout(() => { content.style.display = "none"; }, 350);
+                    setTimeout(() => { content.style.display = "none"; content.hidden = true; }, 350);
                 }
             });
         }
@@ -216,3 +234,5 @@
 
 </body>
 </html>
+
+If you want any micro-adjustments to spacing, font size, or how the bold top statement displays on mobile, tell me which device width to target and I’ll tweak it.
