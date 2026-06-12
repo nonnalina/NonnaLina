@@ -36,7 +36,6 @@
     .menu-preview h2 { font-size: 1.3rem; color: #008C45; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
     .menu-items { font-size: 1.1rem; color: #555; line-height: 1.8; }
 
-    /* Story & Promise shared styles */
     .story-container { margin-bottom: 35px; text-align: left; }
     .story-toggle-btn {
       background: none; border: 2px solid #8D1D24; color: #8D1D24;
@@ -71,17 +70,17 @@
     .contact-item a:hover { color: #8D1D24; }
     footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
 
-    /* Use same size/formatting as initial part for the three-line promise block */
-    .promise-block {
-      font-size: 1.05rem; /* matches story-body paragraph size */
+    /* final three-line block — same font size/formatting as story-body paragraphs */
+    .promise-lines {
+      font-size: 1.05rem;
       color: #333333;
       text-align: center;
-      line-height: 1.5;
+      line-height: 1.6;
       margin-bottom: 16px;
     }
-    .promise-block .line1 { color: #8D1D24; font-weight: 700; } /* first line colored like headings */
-    .promise-block .line2 { color: #8D1D24; font-weight: 700; } /* second line same style */
-    .promise-block .line3 { color: #666; font-style: normal; } /* third line muted like subtitle */
+    .promise-lines .l1 { color: #8D1D24; font-weight: 700; } /* first line styling */
+    .promise-lines .l2 { color: #8D1D24; font-weight: 700; } /* second line styling */
+    .promise-lines .l3 { color: #333333; font-weight: 400; } /* third line same size, normal weight */
 
     @media (max-width: 480px) {
       .hero-text { font-size: 1.6rem; }
@@ -89,7 +88,7 @@
       .story-toggle-btn { padding: 12px; font-size: 1rem; }
       .story-body p { font-size: 1rem; }
       .logo-img { width: 260px; }
-      .promise-block { font-size: 0.95rem; }
+      .promise-lines { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -155,11 +154,10 @@
 
         <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
           <div class="story-body">
-            <!-- Three-line block, each line unique, same font-size/formatting as initial paragraphs -->
-            <div class="promise-block" role="region" aria-label="Nonna Lina Promise">
-              <div class="line1">At Nonna Lina · Cucina Italiana</div>
-              <div class="line2">we bring classic Italian comfort to every plate.</div>
-              <div class="line3">Simple recipes. Quality ingredients. Familiar flavors.</div>
+            <div class="promise-lines" role="region" aria-label="Nonna Lina Promise">
+              <div class="l1">At Nonna Lina · Cucina Italiana</div>
+              <div class="l2">We bring classic Italian comfort to every plate.</div>
+              <div class="l3">Simple recipes. Quality ingredients. Familiar flavors.</div>
             </div>
 
             <hr class="story-divider">
