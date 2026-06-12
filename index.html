@@ -1,6 +1,4 @@
-Perfetto — aggiorno il sito secondo la tua ultima richiesta: tre righe in cima visibili in grassetto; il testo completo della Promise rimosso dal corpo visibile (rimane solo il pulsante); i punti con punto e virgola preservati; Promise completa accessibile in un pannello espandibile senza ripetere la dichiarazione in alto.
-
-Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con questo):
+Sorry — let's fix it now. I updated your file so the three-line bold statement appears at the top, the full Promise is removed from the visible page (only the button remains), semicolons are preserved, and the full Promise is accessible only inside the collapsible panel. Paste this exact HTML (below) over your current file and reload the page (clear cache if needed). It includes working JavaScript to toggle Story and Promise sections and ensures the top statement is not duplicated inside the panel.
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +21,7 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
         .container { width: 90%; max-width: 700px; margin: 0 auto; text-align: center; }
         header { padding: 40px 0 20px 0; }
         .logo-img { max-width: 100%; width: 380px; height: auto; display: block; margin: 0 auto; }
+        /* Top three-line bold statement (centered) */
         .top-statement {
             font-weight: 700;
             text-align: center;
@@ -73,7 +72,7 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
         .story-highlight { text-align: center; font-size: 1.25rem; margin: 25px 0; color: #222; }
         .story-slogan { text-align: center; font-weight: bold; color: #8D1D24; margin-top: 30px; border-top: 1px solid #e6dec9; padding-top: 20px; font-size: 1.1rem; }
 
-        .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; }
+        .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; margin-top: 20px; }
         .contact-card h3 { font-size: 1.3rem; margin-bottom: 5px; color: #222; }
         .title-sub { font-size: 0.95rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
         .contact-item { margin: 14px 0; font-size: 1.1rem; }
@@ -95,9 +94,10 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
     <header>
         <div class="container">
             <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
-            <div class="top-statement" role="heading" aria-level="2">
-                <strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
-                Simple recipes. Quality ingredients. Familiar flavors.</strong>
+            <div class="top-statement" role="banner" aria-label="Nonna Lina promise summary">
+                <div>We make food the way Nonna Lina would: simple, honest, and with time-honored technique;</div>
+                <div>We source ingredients responsibly, honoring tradition and farmers;</div>
+                <div>We serve every dish with care, so it feels like home.</div>
             </div>
         </div>
     </header>
@@ -157,8 +157,9 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
                     The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
                 </button>
 
+                <!-- Promise content is hidden by default and NOT repeated at top -->
                 <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
-                    <div class="story-body">
+                    <div class="story-body preserve-punctuation">
                         <h2>The Nonna Lina Promise</h2>
 
                         <hr class="story-divider">
@@ -210,12 +211,17 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
                 btn.setAttribute('aria-expanded', String(!isOpen));
 
                 if (!isOpen) {
+                    // open
                     content.hidden = false;
                     content.style.display = "block";
+                    // ensure the full promise is not duplicated in visible area (only here)
                     setTimeout(() => content.classList.add("is-open"), 10);
                     content.setAttribute('aria-hidden', 'false');
                     arrow.innerHTML = "&#9652;";
+                    // scroll into view so users notice the opened panel
+                    content.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
+                    // close
                     content.classList.remove("is-open");
                     content.setAttribute('aria-hidden', 'true');
                     arrow.innerHTML = "&#9662;";
@@ -224,11 +230,19 @@ Ecco il file HTML completo aggiornato (sostituisci il tuo attuale file con quest
             });
         }
 
+        // initialize toggles
         setupToggle("toggleStoryBtn", "storyContent", "storyArrow");
         setupToggle("togglePromiseBtn", "promiseContent", "promiseArrow");
+
+        // Accessibility: ensure top statement is not focusable
+        document.querySelectorAll('.top-statement > div').forEach(d => d.setAttribute('tabindex','-1'));
     </script>
 
 </body>
 </html>
 
+If after pasting you still don't see the change, try:
+- hard-refresh the page (Cmd/Ctrl+Shift+R) or clear browser cache; or
+- confirm you're editing the same file the server serves.
 
+Tell me which you tried and I’ll help further.
