@@ -27,6 +27,17 @@
             line-height: 1.25;
             font-size: 1.05rem;
         }
+        /* New grouped promise block */
+        .promise-block {
+            display: inline-block;
+            text-align: center;
+            background: transparent;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .promise-line-1 { display: block; font-weight: 700; color: #8D1D24; font-size: 1.02rem; }
+        .promise-line-2 { display: block; font-weight: 600; color: #8D1D24; font-size: 0.98rem; margin-top: 6px; }
+
         main { flex: 1; padding: 20px 0 40px 0; }
         .coming-soon-badge {
             display: inline-block; background-color: #008C45; color: #fff;
@@ -83,6 +94,7 @@
             .story-toggle-btn { padding: 12px; font-size: 1rem; }
             .story-body p { font-size: 1rem; }
             .top-statement { font-size: 0.95rem; }
+            .logo-img { width: 260px; }
         }
     </style>
 </head>
@@ -92,8 +104,10 @@
         <div class="container">
             <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
             <div class="top-statement" role="heading" aria-level="2">
-                <strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
-                Simple recipes. Quality ingredients. Familiar flavors.</strong>
+                <span class="promise-block" aria-label="Nonna Lina promise">
+                    <span class="promise-line-1">At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</span>
+                    <span class="promise-line-2">Simple recipes. Quality ingredients. Familiar flavors.</span>
+                </span>
             </div>
         </div>
     </header>
@@ -143,7 +157,6 @@
 
                         <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
 
-                        <!-- Revised slogan per request, matching promise slogan -->
                         <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
                     </div>
                 </div>
