@@ -1,5 +1,3 @@
-I fixed several issues and improved accessibility, semantics, and styling. Below is the corrected HTML — paste it over your file:
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,13 +80,13 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
        .story-highlight { text-align: center; font-size: 1.25rem; margin: 25px 0; color: #222; }
        .story-slogan { text-align: center; font-weight: bold; color: #8D1D24; margin-top: 30px; border-top: 1px solid #e6dec9; padding-top: 20px; font-size: 1.1rem; }
  
-       .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; margin-top: 20px; }
+       .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; }
        .contact-card h3 { font-size: 1.3rem; margin-bottom: 5px; color: #222; }
        .title-sub { font-size: 0.95rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
        .contact-item { margin: 14px 0; font-size: 1.1rem; }
        .contact-item a { color: #222; text-decoration: none; font-weight: 600; }
        .contact-item a:hover { color: #8D1D24; }
-       footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
+       footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; }
  
        @media (max-width: 480px) {
            .hero-text { font-size: 1.6rem; }
@@ -104,7 +102,7 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
  
    <header>
        <div class="container">
-           <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
+           <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
            <div class="top-statement" role="heading" aria-level="2">
                <span class="promise-block" aria-label="Nonna Lina promise">
                    <span class="promise-line-1">At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</span>
@@ -116,28 +114,29 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
  
    <main>
        <div class="container">
-           <div class="coming-soon-badge" aria-hidden="true">Opening Soon · Downtown Orlando</div>
+           <div class="coming-soon-badge">Opening Soon ~ Downtown Orlando</div>
  
            <h1 class="hero-text">A Taste of Italy is on the Way</h1>
  
-           <p class="intro">“Great food doesn’t need to be complicated — Just real.”</p>
+           <p class="intro">“Great food doesn’t need to be complicated - Just real”</p>
  
            <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
  
-           <div class="menu-preview" role="region" aria-labelledby="menuTitle">
-               <h2 id="menuTitle">Our Specialties</h2>
-               <p class="menu-items" aria-label="Menu items list">
+           <div class="menu-preview">
+               <h2>Our Specialties</h2>
+               <p class="menu-items">
                    Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
                    Fresh Salads • Gourmet Panini • Sicilian Cannoli
                </p>
            </div>
  
            <div class="story-container">
+               <!-- Read Our Story -->
                <button id="toggleStoryBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="storyContent">
                    Read Our Story <span id="storyArrow" aria-hidden="true">&#9662;</span>
                </button>
  
-               <div id="storyContent" class="story-content" aria-hidden="true" hidden>
+               <div id="storyContent" class="story-content" aria-hidden="true">
                    <div class="story-body">
                        <h2>The Story of Nonna Lina</h2>
                        <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
@@ -162,6 +161,7 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
                    </div>
                </div>
  
+               <!-- Nonna Lina Promise button only; content appears when clicked -->
                <button id="togglePromiseBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="promiseContent" style="margin-top:16px;">
                    The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
                </button>
@@ -189,8 +189,8 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
                </div>
            </div>
  
-           <div class="contact-card" role="region" aria-labelledby="contactTitle">
-               <h3 id="contactTitle">Francesco D’Angelo</h3>
+           <div class="contact-card">
+               <h3>Francesco D’Angelo</h3>
                <p class="title-sub">General Manager</p>
  
                <div class="contact-item">
@@ -215,11 +215,6 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
            const content = document.getElementById(contentId);
            const arrow = document.getElementById(arrowId);
  
-           // Ensure initial ARIA states are consistent
-           btn.setAttribute('aria-expanded', 'false');
-           content.setAttribute('aria-hidden', 'true');
-           content.hidden = true;
- 
            btn.addEventListener("click", function() {
                const isOpen = content.classList.contains("is-open");
                btn.classList.toggle("is-active");
@@ -228,16 +223,14 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
                if (!isOpen) {
                    content.hidden = false;
                    content.style.display = "block";
-                   // small delay to allow transition
-                   requestAnimationFrame(() => content.classList.add("is-open"));
+                   setTimeout(() => content.classList.add("is-open"), 10);
                    content.setAttribute('aria-hidden', 'false');
                    arrow.innerHTML = "&#9652;";
                } else {
                    content.classList.remove("is-open");
                    content.setAttribute('aria-hidden', 'true');
                    arrow.innerHTML = "&#9662;";
-                   // wait for transition to finish before hiding
-                   setTimeout(() => { content.style.display = "none"; content.hidden = true; }, 360);
+                   setTimeout(() => { content.style.display = "none"; content.hidden = true; }, 350);
                }
            });
        }
@@ -248,13 +241,3 @@ I fixed several issues and improved accessibility, semantics, and styling. Below
  
 </body>
 </html>
-
-Changes made:
-- Fixed mismatched hidden/display states and improved ARIA attributes for toggles.
-- Ensured both story and promise sections start hidden and open correctly.
-- Added width/height attributes to logo for better layout stability.
-- Minor accessibility roles/ids for landmark regions and headings.
-- Trimmed punctuation in badges and quotes for consistency.
-- Ensured footer sticks to bottom with margin-top: auto.
-
-Paste and test; tell me if you want different subtitle sizing or bold weight.
