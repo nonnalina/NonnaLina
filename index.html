@@ -1,3 +1,5 @@
+Done — I updated the HTML so the "Read Our Story" button is replaced with the visible heading "THE STORY OF NONNA LINA" (same button styling) and removed the original <h2>The Story of Nonna Lina</h2> from inside the expanded content. Here's the complete site code with that change:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +55,6 @@
     }
     .story-content.is-open { display: block; opacity: 1; }
     .story-toggle-btn.is-active { border-radius: 12px 12px 0 0; background-color: #8D1D24; color: #ffffff; }
-    .story-body h2 { font-size: 1.6rem; color: #8D1D24; margin-bottom: 5px; text-align: center; font-family: Georgia, serif; }
     .story-body .subtitle-line { display: block; font-size: 1.05rem; color: #666; font-style: italic; margin-top: 8px; }
     .story-subtitle { font-style: italic; text-align: center; color: #666; margin-bottom: 20px; font-size: 1.05rem; }
     .story-divider { border: 0; height: 1px; background: #e6dec9; margin: 20px 0; }
@@ -70,7 +71,6 @@
     .contact-item a:hover { color: #8D1D24; }
     footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
 
-    /* final three-line block — same font size/formatting as story-body paragraphs */
     .promise-lines {
       font-size: 1.05rem;
       color: #333333;
@@ -78,9 +78,9 @@
       line-height: 1.6;
       margin-bottom: 16px;
     }
-    .promise-lines .l1 { color: #8D1D24; font-weight: 700; } /* first line styling */
-    .promise-lines .l2 { color: #8D1D24; font-weight: 700; } /* second line styling */
-    .promise-lines .l3 { color: #333333; font-weight: 400; } /* third line same size, normal weight */
+    .promise-lines .l1 { color: #8D1D24; font-weight: 700; }
+    .promise-lines .l2 { color: #8D1D24; font-weight: 700; }
+    .promise-lines .l3 { color: #333333; font-weight: 400; }
 
     @media (max-width: 480px) {
       .hero-text { font-size: 1.6rem; }
@@ -119,13 +119,15 @@
       </div>
 
       <div class="story-container">
+        <!-- Replaced button label with heading "THE STORY OF NONNA LINA" while keeping the toggle behavior and styling -->
         <button id="toggleStoryBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="storyContent">
-          Read Our Story <span id="storyArrow" aria-hidden="true">&#9662;</span>
+          THE STORY OF NONNA LINA <span id="storyArrow" aria-hidden="true">&#9662;</span>
         </button>
 
         <div id="storyContent" class="story-content" aria-hidden="true" hidden>
           <div class="story-body">
-            <h2>The Story of Nonna Lina</h2>
+            <!-- Removed the inner <h2>The Story of Nonna Lina</h2> as requested -->
+
             <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
 
             <hr class="story-divider">
