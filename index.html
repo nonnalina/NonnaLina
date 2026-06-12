@@ -71,23 +71,17 @@
     .contact-item a:hover { color: #8D1D24; }
     footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
 
-    /* Adjusted styles for promise heading + subtitle to be same size */
-    .promise-heading {
-      font-size: 1.15rem; /* unified size */
-      color: #8D1D24;
-      font-weight: 700;
+    /* Use same size/formatting as initial part for the three-line promise block */
+    .promise-block {
+      font-size: 1.05rem; /* matches story-body paragraph size */
+      color: #333333;
       text-align: center;
-      line-height: 1.35;
-      margin-bottom: 10px;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
-    .promise-subline {
-      font-size: 1.15rem; /* same as heading */
-      color: #666;
-      font-style: normal;
-      text-align: center;
-      line-height: 1.35;
-      margin-top: 6px;
-    }
+    .promise-block .line1 { color: #8D1D24; font-weight: 700; } /* first line colored like headings */
+    .promise-block .line2 { color: #8D1D24; font-weight: 700; } /* second line same style */
+    .promise-block .line3 { color: #666; font-style: normal; } /* third line muted like subtitle */
 
     @media (max-width: 480px) {
       .hero-text { font-size: 1.6rem; }
@@ -95,7 +89,7 @@
       .story-toggle-btn { padding: 12px; font-size: 1rem; }
       .story-body p { font-size: 1rem; }
       .logo-img { width: 260px; }
-      .promise-heading, .promise-subline { font-size: 1rem; } /* scale down on small screens */
+      .promise-block { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -161,16 +155,11 @@
 
         <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
           <div class="story-body">
-            <!-- Updated: three lines, unified font size -->
-            <div class="promise-heading" role="heading" aria-level="2">
-              At Nonna Lina · Cucina Italiana
-            </div>
-            <div class="promise-heading">
-              we bring classic Italian comfort to every plate.
-            </div>
-            <div class="promise-subline">
-              At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
-              Simple recipes. Quality ingredients. Familiar flavors.
+            <!-- Three-line block, each line unique, same font-size/formatting as initial paragraphs -->
+            <div class="promise-block" role="region" aria-label="Nonna Lina Promise">
+              <div class="line1">At Nonna Lina · Cucina Italiana</div>
+              <div class="line2">we bring classic Italian comfort to every plate.</div>
+              <div class="line3">Simple recipes. Quality ingredients. Familiar flavors.</div>
             </div>
 
             <hr class="story-divider">
@@ -181,7 +170,7 @@
 
             <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
 
-            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
+            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
 
             <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
 
