@@ -1,3 +1,5 @@
+Yes — I'll move "Simple recipes. Quality ingredients. Familiar flavors." up into the same H2 as the line "At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate." with the same formatting (two lines: bold main line + italic/subline). Below is the full updated site code — paste over your file:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +57,7 @@
     .story-content.is-open { display: block; opacity: 1; }
     .story-toggle-btn.is-active { border-radius: 12px 12px 0 0; background-color: #8D1D24; color: #ffffff; }
     .story-body h2 { font-size: 1.6rem; color: #8D1D24; margin-bottom: 5px; text-align: center; font-family: Georgia, serif; }
+    .story-body .subtitle-line { display: block; font-size: 1.05rem; color: #666; font-style: italic; margin-top: 8px; }
     .story-subtitle { font-style: italic; text-align: center; color: #666; margin-bottom: 20px; font-size: 1.05rem; }
     .story-divider { border: 0; height: 1px; background: #e6dec9; margin: 20px 0; }
     .story-body p { margin-bottom: 18px; font-size: 1.05rem; color: #333333; line-height: 1.7; }
@@ -142,11 +145,11 @@
 
         <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
           <div class="story-body">
-            <h2>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</h2>
+            <h2>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.
+              <span class="subtitle-line">Simple recipes. Quality ingredients. Familiar flavors.</span>
+            </h2>
 
             <hr class="story-divider">
-
-            <p>Simple recipes. Quality ingredients. Familiar flavors.</p>
 
             <p><strong>Quality first:</strong> We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.</p>
 
