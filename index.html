@@ -1,12 +1,9 @@
-Sorry — let's fix it now. I updated your file so the three-line bold statement appears at the top, the full Promise is removed from the visible page (only the button remains), semicolons are preserved, and the full Promise is accessible only inside the collapsible panel. Paste this exact HTML (below) over your current file and reload the page (clear cache if needed). It includes working JavaScript to toggle Story and Promise sections and ensures the top statement is not duplicated inside the panel.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nonna Lina | Cucina Italiana</title>
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -21,6 +18,7 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
         .container { width: 90%; max-width: 700px; margin: 0 auto; text-align: center; }
         header { padding: 40px 0 20px 0; }
         .logo-img { max-width: 100%; width: 380px; height: auto; display: block; margin: 0 auto; }
+
         /* Top three-line bold statement (centered) */
         .top-statement {
             font-weight: 700;
@@ -30,6 +28,7 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
             line-height: 1.25;
             font-size: 1.05rem;
         }
+
         main { flex: 1; padding: 20px 0 40px 0; }
         .coming-soon-badge {
             display: inline-block; background-color: #008C45; color: #fff;
@@ -80,6 +79,12 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
         .contact-item a:hover { color: #8D1D24; }
         footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; }
 
+        .visually-hidden{
+            position:absolute!important;
+            height:1px;width:1px;overflow:hidden;
+            clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px;
+        }
+
         @media (max-width: 480px) {
             .hero-text { font-size: 1.6rem; }
             .intro { font-size: 1rem; }
@@ -95,9 +100,8 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
         <div class="container">
             <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
             <div class="top-statement" role="banner" aria-label="Nonna Lina promise summary">
-                <div>We make food the way Nonna Lina would: simple, honest, and with time-honored technique;</div>
-                <div>We source ingredients responsibly, honoring tradition and farmers;</div>
-                <div>We serve every dish with care, so it feels like home.</div>
+                <div><strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</strong></div>
+                <div><strong>Simple recipes. Quality ingredients. Familiar flavors.</strong></div>
             </div>
         </div>
     </header>
@@ -152,27 +156,25 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
                     </div>
                 </div>
 
-                <!-- Nonna Lina Promise button only; content appears when clicked -->
+                <!-- Visible three-line bold statement already in header; keep Promise button visible and clickable -->
                 <button id="togglePromiseBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="promiseContent" style="margin-top:16px;">
                     The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
                 </button>
 
-                <!-- Promise content is hidden by default and NOT repeated at top -->
+                <!-- Full Promise remains accessible only inside this collapsible panel (not repeated at top) -->
                 <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
                     <div class="story-body preserve-punctuation">
-                        <h2>The Nonna Lina Promise</h2>
+                        <h2 class="visually-hidden">The Nonna Lina Promise</h2>
 
                         <hr class="story-divider">
 
-                        <p><strong>Quality first:</strong> We use imported pasta and premium ingredients; Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli; to ensure authentic flavor.</p>
+                        <p>We make food the way Nonna Lina would: simple, honest, and with time-honored technique;  
+                        We source ingredients responsibly, honoring tradition and farmers;  
+                        We serve every dish with care, so it feels like home.</p>
 
-                        <p><strong>Simple recipes:</strong> Our sauces; Alfredo, Marinara, Salsa Rosa, Nonna Lina, Bolognese and Aglio & Olio; are straight forward and crafted to showcase those ingredients.</p>
+                        <p>Our Promise — crafted from recipes and memories passed down through generations — is to prepare every meal with attention and patience; to use ingredients we trust; and to treat every guest with warmth. We do not cut corners; we respect the time and method each dish requires; and we stand behind the flavor and quality of what we serve.</p>
 
-                        <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
-
-                        <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
-
-                        <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
+                        <p>If anything we serve does not meet your expectation, tell us — we will make it right. We value feedback, and we learn from it. Your table is where the tradition continues.</p>
 
                         <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
                     </div>
@@ -211,17 +213,13 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
                 btn.setAttribute('aria-expanded', String(!isOpen));
 
                 if (!isOpen) {
-                    // open
                     content.hidden = false;
                     content.style.display = "block";
-                    // ensure the full promise is not duplicated in visible area (only here)
                     setTimeout(() => content.classList.add("is-open"), 10);
                     content.setAttribute('aria-hidden', 'false');
                     arrow.innerHTML = "&#9652;";
-                    // scroll into view so users notice the opened panel
                     content.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    // close
                     content.classList.remove("is-open");
                     content.setAttribute('aria-hidden', 'true');
                     arrow.innerHTML = "&#9662;";
@@ -230,19 +228,12 @@ Sorry — let's fix it now. I updated your file so the three-line bold statement
             });
         }
 
-        // initialize toggles
         setupToggle("toggleStoryBtn", "storyContent", "storyArrow");
         setupToggle("togglePromiseBtn", "promiseContent", "promiseArrow");
 
-        // Accessibility: ensure top statement is not focusable
+        // Make top-statement lines non-focusable
         document.querySelectorAll('.top-statement > div').forEach(d => d.setAttribute('tabindex','-1'));
     </script>
 
 </body>
 </html>
-
-If after pasting you still don't see the change, try:
-- hard-refresh the page (Cmd/Ctrl+Shift+R) or clear browser cache; or
-- confirm you're editing the same file the server serves.
-
-Tell me which you tried and I’ll help further.
