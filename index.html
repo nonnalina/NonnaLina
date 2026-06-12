@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nonna Lina | Cucina Italiana</title>
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -18,8 +19,6 @@
         .container { width: 90%; max-width: 700px; margin: 0 auto; text-align: center; }
         header { padding: 40px 0 20px 0; }
         .logo-img { max-width: 100%; width: 380px; height: auto; display: block; margin: 0 auto; }
-
-        /* Top three-line bold statement (centered) */
         .top-statement {
             font-weight: 700;
             text-align: center;
@@ -28,7 +27,6 @@
             line-height: 1.25;
             font-size: 1.05rem;
         }
-
         main { flex: 1; padding: 20px 0 40px 0; }
         .coming-soon-badge {
             display: inline-block; background-color: #008C45; color: #fff;
@@ -71,19 +69,13 @@
         .story-highlight { text-align: center; font-size: 1.25rem; margin: 25px 0; color: #222; }
         .story-slogan { text-align: center; font-weight: bold; color: #8D1D24; margin-top: 30px; border-top: 1px solid #e6dec9; padding-top: 20px; font-size: 1.1rem; }
 
-        .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; margin-top: 20px; }
+        .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; }
         .contact-card h3 { font-size: 1.3rem; margin-bottom: 5px; color: #222; }
         .title-sub { font-size: 0.95rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
         .contact-item { margin: 14px 0; font-size: 1.1rem; }
         .contact-item a { color: #222; text-decoration: none; font-weight: 600; }
         .contact-item a:hover { color: #8D1D24; }
         footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; }
-
-        .visually-hidden{
-            position:absolute!important;
-            height:1px;width:1px;overflow:hidden;
-            clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px;
-        }
 
         @media (max-width: 480px) {
             .hero-text { font-size: 1.6rem; }
@@ -99,9 +91,9 @@
     <header>
         <div class="container">
             <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
-            <div class="top-statement" role="banner" aria-label="Nonna Lina promise summary">
-                <div><strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</strong></div>
-                <div><strong>Simple recipes. Quality ingredients. Familiar flavors.</strong></div>
+            <div class="top-statement" role="heading" aria-level="2">
+                <strong>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
+                Simple recipes. Quality ingredients. Familiar flavors.</strong>
             </div>
         </div>
     </header>
@@ -156,25 +148,28 @@
                     </div>
                 </div>
 
-                <!-- Visible three-line bold statement already in header; keep Promise button visible and clickable -->
+                <!-- Nonna Lina Promise button only; content appears when clicked -->
                 <button id="togglePromiseBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="promiseContent" style="margin-top:16px;">
                     The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
                 </button>
 
-                <!-- Full Promise remains accessible only inside this collapsible panel (not repeated at top) -->
                 <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
-                    <div class="story-body preserve-punctuation">
-                        <h2 class="visually-hidden">The Nonna Lina Promise</h2>
+                    <div class="story-body">
+                        <h2>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.</h2>
 
                         <hr class="story-divider">
 
-                        <p>We make food the way Nonna Lina would: simple, honest, and with time-honored technique;  
-                        We source ingredients responsibly, honoring tradition and farmers;  
-                        We serve every dish with care, so it feels like home.</p>
+                        <p>Simple recipes. Quality ingredients. Familiar flavors.</p>
 
-                        <p>Our Promise — crafted from recipes and memories passed down through generations — is to prepare every meal with attention and patience; to use ingredients we trust; and to treat every guest with warmth. We do not cut corners; we respect the time and method each dish requires; and we stand behind the flavor and quality of what we serve.</p>
+                        <p><strong>Quality first:</strong> We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.</p>
 
-                        <p>If anything we serve does not meet your expectation, tell us — we will make it right. We value feedback, and we learn from it. Your table is where the tradition continues.</p>
+                        <p><strong>Simple recipes:</strong> Our sauces—Alfredo, Marinara, Salsa Rosa, Nonna Lina, Bolognese and Aglio & Olio—are straightforward and crafted to showcase those ingredients.</p>
+
+                        <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
+
+                        <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
+
+                        <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
 
                         <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
                     </div>
@@ -218,7 +213,6 @@
                     setTimeout(() => content.classList.add("is-open"), 10);
                     content.setAttribute('aria-hidden', 'false');
                     arrow.innerHTML = "&#9652;";
-                    content.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     content.classList.remove("is-open");
                     content.setAttribute('aria-hidden', 'true');
@@ -230,9 +224,6 @@
 
         setupToggle("toggleStoryBtn", "storyContent", "storyArrow");
         setupToggle("togglePromiseBtn", "promiseContent", "promiseArrow");
-
-        // Make top-statement lines non-focusable
-        document.querySelectorAll('.top-statement > div').forEach(d => d.setAttribute('tabindex','-1'));
     </script>
 
 </body>
