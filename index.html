@@ -71,12 +71,31 @@
     .contact-item a:hover { color: #8D1D24; }
     footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
 
+    /* Adjusted styles for promise heading + subtitle to be same size */
+    .promise-heading {
+      font-size: 1.15rem; /* unified size */
+      color: #8D1D24;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .promise-subline {
+      font-size: 1.15rem; /* same as heading */
+      color: #666;
+      font-style: normal;
+      text-align: center;
+      line-height: 1.35;
+      margin-top: 6px;
+    }
+
     @media (max-width: 480px) {
       .hero-text { font-size: 1.6rem; }
       .intro { font-size: 1rem; }
       .story-toggle-btn { padding: 12px; font-size: 1rem; }
       .story-body p { font-size: 1rem; }
       .logo-img { width: 260px; }
+      .promise-heading, .promise-subline { font-size: 1rem; } /* scale down on small screens */
     }
   </style>
 </head>
@@ -85,7 +104,6 @@
   <header>
     <div class="container">
       <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
-      <!-- top statement removed as requested -->
     </div>
   </header>
 
@@ -143,9 +161,17 @@
 
         <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
           <div class="story-body">
-            <h2>At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.
-              <span class="subtitle-line">Simple recipes. Quality ingredients. Familiar flavors.</span>
-            </h2>
+            <!-- Updated: three lines, unified font size -->
+            <div class="promise-heading" role="heading" aria-level="2">
+              At Nonna Lina · Cucina Italiana
+            </div>
+            <div class="promise-heading">
+              we bring classic Italian comfort to every plate.
+            </div>
+            <div class="promise-subline">
+              At Nonna Lina · Cucina Italiana, we bring classic Italian comfort to every plate.<br>
+              Simple recipes. Quality ingredients. Familiar flavors.
+            </div>
 
             <hr class="story-divider">
 
@@ -155,7 +181,7 @@
 
             <p><strong>Customizable plates:</strong> Choose a pasta (spaghetti, fettuccine, caserecce, penne) and pair it with shrimp, sausage, chicken or meatballs and fresh vegetables for a satisfying, familiar meal.</p>
 
-            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
+            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
 
             <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
 
