@@ -1,67 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nonna Lina | Cucina Italiana</title>
- 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #2b2b2b;
-            background-color: #fbf9f3; /* Warm parchment color matching the logo background */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .container {
-            width: 90%;
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        header {
-            padding: 40px 0 20px 0;
-        }
-        .logo-img {
-            max-width: 100%;
-            width: 380px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        main {
-            flex: 1;
-            padding: 20px 0 40px 0;
-        }
-        .coming-soon-badge {
-            display: inline-block;
-            background-color: #008C45; /* Italian Flag Green */
-            color: #fff;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-        }
-        .hero-text {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #8D1D24; /* Elegant red matching the logo text */
-            font-weight: 700;
-        }
-        .intro {
-            font-size: 1.25rem;
-            color: #8D1D24; /* Styled to match the brand color */
-            margin: 5px 0 30px 0;
+<div class="menu-container">
+  <button id="toggleMenuBtn" class="story-toggle-btn" aria-expanded="false">
+    Menu <span id="menuArrow">&#9662;</span>
+  </button>
+
+  <div id="menuContent" class="story-content" aria-hidden="true" style="display:none; padding:24px 30px;">
+    <h2 style="margin-top:0; text-align:center; color:#008C45; font-size:1.25rem;">Our Specialties</h2>
+    <div class="menu-items" style="text-align:left; padding-top:10px;">
+      <p><strong>Pasta</strong><br>Spaghetti Pomodoro — House meatball — Pappardelle Bolognese</p>
+      <p><strong>Pizza</strong><br>Sicilian Slice — Margherita — Pepperoni</p>
+      <p><strong>Panini & Salads</strong><br>Italian Press — Arugula & Burrata Salad</p>
+      <p><strong>Dolci</strong><br>Sicilian Cannoli — Tiramisu</p>
+    </div>
+  </div>
+</div>
+```
+
+- Add these CSS rules (you can place them near your existing dropdown styles; they reuse the same classes so no extra styling conflict):
+
+```
+.menu-container { margin-bottom:25px; }
+```
+
+- Replace or append this JS (it mirrors the story toggle behavior):
+
+```
+const toggleMenuBtn = document.getElementById("toggleMenuBtn");
+const menuContent = document.getElementById("menuContent");
+const menuArrow = document.getElementById("menuArrow");
+
+toggleMenuBtn.addEventListener("click", function() {
+  toggleMenuBtn.classList.toggle("is-active");
+  const open = menuContent.classList.contains("is-open");
+
+  if (!open) {
+    menuContent.style.display = "block";
+    setTimeout(() => menuContent.classList.add("is-open"), 10);
+    menuArrow.innerHTML = "&#9652;";
+    toggleMenuBtn.setAttribute("aria-expanded", "true");
+    menuContent.setAttribute("aria-hidden", "false");
+  } else {
+    menuContent.classList.remove("is-open");
+    // wait for fade-out then hide to avoid abrupt jump
+    setTimeout(() => { menuContent.style.display = "none"; }, 250);
+    menuArrow.innerHTML = "&#9662;";
+    toggleMenuBtn.setAttribute("aria-expanded", "false");
+    menuContent.setAttribute("aria-hidden", "true");
+  }
+});
+```
+
+This preserves your page, uses the same button style as "Read Our Story", and makes the menu open/close on click. If you want the menu button labeled "Our Specialties" instead of "Menu", or a different menu item list, tell me which label and exact items and I'll update it.            margin: 5px 0 30px 0;
             font-style: italic;
             font-weight: 500;
         }
