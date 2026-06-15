@@ -1,326 +1,324 @@
-<div class="menu-container">
-  <button id="toggleMenuBtn" class="story-toggle-btn" aria-expanded="false">
-    Menu <span id="menuArrow">&#9662;</span>
-  </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nonna Lina | Cucina Italiana</title>
 
-  <div id="menuContent" class="story-content" aria-hidden="true" style="display:none; padding:24px 30px;">
-    <h2 style="margin-top:0; text-align:center; color:#008C45; font-size:1.25rem;">Our Specialties</h2>
-    <div class="menu-items" style="text-align:left; padding-top:10px;">
-      <p><strong>Pasta</strong><br>Spaghetti Pomodoro — House meatball — Pappardelle Bolognese</p>
-      <p><strong>Pizza</strong><br>Sicilian Slice — Margherita — Pepperoni</p>
-      <p><strong>Panini & Salads</strong><br>Italian Press — Arugula & Burrata Salad</p>
-      <p><strong>Dolci</strong><br>Sicilian Cannoli — Tiramisu</p>
-    </div>
-  </div>
-</div>
-```
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #2b2b2b;
+      background-color: #fbf9f3;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container { width: 90%; max-width: 700px; margin: 0 auto; text-align: center; }
+    header { padding: 40px 0 20px 0; }
+    .logo-img { max-width: 100%; width: 380px; height: auto; display: block; margin: 0 auto; }
 
-- Add these CSS rules (you can place them near your existing dropdown styles; they reuse the same classes so no extra styling conflict):
+    main { flex: 1; padding: 20px 0 40px 0; }
+    .coming-soon-badge {
+      display: inline-block; background-color: #008C45; color: #fff;
+      padding: 6px 16px; font-size: 0.9rem; font-weight: bold;
+      text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .hero-block { margin-bottom: 15px; }
+    .hero-line {
+      font-size: 2rem;
+      color: #8D1D24;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-```
-.menu-container { margin-bottom:25px; }
-```
+    /* Auto-shrink subhead setup */
+    .auto-subhead-wrap { width: 100%; display: block; }
+    .subhead {
+      font-size: 20px;            /* max starting size (will be reduced by JS if needed) */
+      line-height: 1;
+      margin: 0 0 14px 0;
+      white-space: nowrap;        /* force single line */
+      overflow: hidden;
+      text-overflow: clip;
+      display: inline-block;
+      font-weight: 500;
+      color: #8D1D24;
+      font-style: normal;
+      max-width: 100%;
+    }
 
-- Replace or append this JS (it mirrors the story toggle behavior):
+    .description-text { font-size: 1.1rem; color: #4a4a4a; margin-bottom: 30px; }
+    .menu-preview {
+      background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e6dec9;
+      margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .menu-preview h2 { font-size: 1.3rem; color: #008C45; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+    .menu-items { font-size: 1.1rem; color: #555; line-height: 1.8; }
 
-```
-const toggleMenuBtn = document.getElementById("toggleMenuBtn");
-const menuContent = document.getElementById("menuContent");
-const menuArrow = document.getElementById("menuArrow");
+    .story-container { margin-bottom: 35px; text-align: left; }
+    .story-toggle-btn {
+      background: none; border: 2px solid #8D1D24; color: #8D1D24;
+      width: 100%; padding: 14px; font-size: 1.1rem; font-weight: bold;
+      text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+      border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 10px;
+      transition: all 0.3s ease;
+    }
+    .story-toggle-btn:hover { background-color: #8D1D24; color: #ffffff; }
+    .story-content {
+      display: none; opacity: 0; transition: opacity 0.35s ease-in-out;
+      background-color: #ffffff; border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02); border: 1px solid #e6dec9; border-top: none;
+      margin-top: -5px; padding: 35px 30px;
+    }
+    .story-content.is-open { display: block; opacity: 1; }
+    .story-toggle-btn.is-active { border-radius: 12px 12px 0 0; background-color: #8D1D24; color: #ffffff; }
+    .story-body .subtitle-line { display: block; font-size: 1.05rem; color: #666; font-style: italic; margin-top: 8px; }
+    .story-subtitle { font-style: italic; text-align: center; color: #666; margin-bottom: 20px; font-size: 1.05rem; }
+    .story-divider { border: 0; height: 1px; background: #e6dec9; margin: 20px 0; }
+    .story-body p { margin-bottom: 18px; font-size: 1.05rem; color: #333333; line-height: 1.7; }
+    .story-body blockquote { font-style: italic; border-left: 3px solid #008C45; margin: 25px 0; padding-left: 15px; color: #555; }
+    .story-highlight { text-align: center; font-size: 1.25rem; margin: 25px 0; color: #222; }
+    .story-slogan { text-align: center; font-weight: bold; color: #8D1D24; margin-top: 30px; border-top: 1px solid #e6dec9; padding-top: 20px; font-size: 1.1rem; }
 
-toggleMenuBtn.addEventListener("click", function() {
-  toggleMenuBtn.classList.toggle("is-active");
-  const open = menuContent.classList.contains("is-open");
+    .contact-card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06); display: inline-block; width: 100%; max-width: 450px; border-top: 4px solid #8D1D24; margin-top: 20px; }
+    .contact-card h3 { font-size: 1.3rem; margin-bottom: 5px; color: #222; }
+    .title-sub { font-size: 0.95rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .contact-item { margin: 14px 0; font-size: 1.1rem; }
+    .contact-item a { color: #222; text-decoration: none; font-weight: 600; }
+    .contact-item a:hover { color: #8D1D24; }
+    footer { padding: 30px 0; font-size: 0.85rem; color: #999; border-top: 1px solid #eaeaea; background: #f4f0e6; margin-top: auto; }
 
-  if (!open) {
-    menuContent.style.display = "block";
-    setTimeout(() => menuContent.classList.add("is-open"), 10);
-    menuArrow.innerHTML = "&#9652;";
-    toggleMenuBtn.setAttribute("aria-expanded", "true");
-    menuContent.setAttribute("aria-hidden", "false");
-  } else {
-    menuContent.classList.remove("is-open");
-    // wait for fade-out then hide to avoid abrupt jump
-    setTimeout(() => { menuContent.style.display = "none"; }, 250);
-    menuArrow.innerHTML = "&#9662;";
-    toggleMenuBtn.setAttribute("aria-expanded", "false");
-    menuContent.setAttribute("aria-hidden", "true");
-  }
-});
-```
+    .promise-lines {
+      font-size: 1.05rem;
+      color: #333333;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .promise-lines .l1 { color: #8D1D24; font-weight: 700; }
+    .promise-lines .l2 { color: #8D1D24; font-weight: 700; }
+    .promise-lines .l3 { color: #8D1D24; font-weight: 700; font-size: 1.05rem; }
 
-This preserves your page, uses the same button style as "Read Our Story", and makes the menu open/close on click. If you want the menu button labeled "Our Specialties" instead of "Menu", or a different menu item list, tell me which label and exact items and I'll update it.            margin: 5px 0 30px 0;
-            font-style: italic;
-            font-weight: 500;
-        }
-        .description-text {
-            font-size: 1.1rem;
-            color: #4a4a4a;
-            margin-bottom: 30px;
-        }
-        .menu-preview {
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e6dec9;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .menu-preview h2 {
-            font-size: 1.3rem;
-            color: #008C45;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .menu-items {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
-        }
- 
-        /* --- STYLES FOR THE "OUR STORY" DROPDOWN --- */
-        .story-container {
-            margin-bottom: 35px;
-            text-align: left; /* Text aligns naturally inside the story */
-        }
-        .story-toggle-btn {
-            background: none;
-            border: 2px solid #8D1D24;
-            color: #8D1D24;
-            width: 100%;
-            padding: 14px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        .story-toggle-btn:hover {
-            background-color: #8D1D24;
-            color: #ffffff;
-        }
-        .story-content {
-            display: none; /* Hidden completely until clicked */
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-            background-color: #ffffff;
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-            border: 1px solid #e6dec9;
-            border-top: none;
-            margin-top: -5px; /* Smooth join with button */
-            padding: 35px 30px;
-        }
-        /* Class added dynamically via JavaScript when open */
-        .story-content.is-open {
-            display: block; /* Takes up natural height automatically */
-            opacity: 1;
-        }
-        .story-toggle-btn.is-active {
-            border-radius: 12px 12px 0 0;
-            background-color: #8D1D24;
-            color: #ffffff;
-        }
-        .story-body h2 {
-            font-size: 1.6rem;
-            color: #8D1D24;
-            margin-bottom: 5px;
-            text-align: center;
-            font-family: Georgia, serif;
-        }
-        .story-subtitle {
-            font-style: italic;
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-        }
-        .story-divider {
-            border: 0;
-            height: 1px;
-            background: #e6dec9;
-            margin: 20px 0;
-        }
-        .story-body p {
-            margin-bottom: 18px;
-            font-size: 1.05rem;
-            color: #333333;
-            line-height: 1.7;
-        }
-        .story-body blockquote {
-            font-style: italic;
-            border-left: 3px solid #008C45; /* Green accent */
-            margin: 25px 0;
-            padding-left: 15px;
-            color: #555;
-        }
-        .story-highlight {
-            text-align: center;
-            font-size: 1.25rem;
-            margin: 25px 0;
-            color: #222;
-        }
-        .story-slogan {
-            text-align: center;
-            font-weight: bold;
-            color: #8D1D24;
-            margin-top: 30px;
-            border-top: 1px solid #e6dec9;
-            padding-top: 20px;
-            font-size: 1.1rem;
-        }
-        /* ------------------------------------------- */
- 
-        .contact-card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(141, 29, 36, 0.06);
-            display: inline-block;
-            width: 100%;
-            max-width: 450px;
-            border-top: 4px solid #8D1D24;
-        }
-        .contact-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: #222;
-        }
-        .title-sub {
-            font-size: 0.95rem;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        .contact-item {
-            margin: 14px 0;
-            font-size: 1.1rem;
-        }
-        .contact-item a {
-            color: #222;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .contact-item a:hover {
-            color: #8D1D24;
-        }
-        footer {
-            padding: 30px 0;
-            font-size: 0.85rem;
-            color: #999;
-            border-top: 1px solid #eaeaea;
-            background: #f4f0e6;
-        }
-    </style>
+    @media (max-width: 480px) {
+      .hero-line { font-size: 1.6rem; }
+      .description-text { font-size: 1rem; }
+      .story-toggle-btn { padding: 12px; font-size: 1rem; }
+      .story-body p { font-size: 1rem; }
+      .logo-img { width: 260px; }
+      .promise-lines { font-size: 0.95rem; }
+      .promise-lines .l3 { font-size: 0.95rem; }
+      .subhead { font-size: 16px; } /* lower starting point on small screens */
+    }
+  </style>
 </head>
 <body>
- 
-    <header>
-        <div class="container">
-            <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img">
+
+  <header>
+    <div class="container">
+      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="coming-soon-badge" aria-hidden="true">Opening Soon · Downtown Orlando</div>
+
+      <div class="hero-block" role="heading" aria-level="1">
+        <div class="hero-line">A Taste of Italy is on the Way</div>
+
+        <!-- Wrapped to allow JS measuring inside its container -->
+        <div class="auto-subhead-wrap" aria-hidden="false">
+          <div id="autoSubhead" class="subhead" role="text" aria-label="Tagline">
+            “Great food doesn’t need to be complicated — Just real.”
+          </div>
         </div>
-    </header>
- 
-    <main>
-        <div class="container">
-            <div class="coming-soon-badge">Opening Soon in Central Florida</div>
-            
-            <h1 class="hero-text">A Taste of Italy is on the Way</h1>
-            
-            <p class="intro">“Great food doesn’t need to be complicated - Just real”</p>
-            
-            <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
-            
-            <div class="menu-preview">
-                <h2>Our Specialties</h2>
-                <p class="menu-items">
-                    Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
-                    Fresh Salads • Gourmet Panini • Sicilian Cannoli
-                </p>
-            </div>
-            
-            <div class="story-container">
-                <button id="toggleStoryBtn" class="story-toggle-btn">
-                    Read Our Story <span id="storyArrow">&#9662;</span>
-                </button>
-                
-                <div id="storyContent" class="story-content">
-                    <div class="story-body">
-                        <h2>The Story of Nonna Lina</h2>
-                        <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
-                        
-                        <hr class="story-divider">
-                        
-                        <p>Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
-                        
-                        <p>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
-                        
-                        <p>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
-                        
-                        <blockquote>In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten.</blockquote>
-                        
-                        <p>Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children —to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
-                        
-                        <p class="story-highlight">This is more than a restaurant. <br><strong>It is a tribute.</strong></p>
-                        
-                        <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
-                        
-                        <p class="story-slogan">Because great food doesn’t need to be complicated—just real.<br>Just like Nonna Lina.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-card">
-                <h3>Francesco D’Angelo</h3>
-                <p class="title-sub">General Manager</p>
-                
-                <div class="contact-item">
-                    📞 <a href="tel:+14075369155">407.536.9155</a>
-                </div>
-                <div class="contact-item">
-                    📧 <a href="mailto:Francesco@NonnaLina.us">Francesco@NonnaLina.us</a>
-                </div>
-            </div>
+      </div>
+
+      <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+
+      <div class="menu-preview" role="region" aria-labelledby="menuTitle">
+        <h2 id="menuTitle">Our Specialties</h2>
+        <p class="menu-items" aria-label="Menu items list">
+          Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
+          Fresh Salads • Gourmet Panini • Sicilian Cannoli
+        </p>
+      </div>
+
+      <div class="story-container">
+        <button id="toggleStoryBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="storyContent">
+          THE STORY OF NONNA LINA <span id="storyArrow" aria-hidden="true">&#9662;</span>
+        </button>
+
+        <div id="storyContent" class="story-content" aria-hidden="true" hidden>
+          <div class="story-body">
+            <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
+
+            <hr class="story-divider">
+
+            <p>Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
+
+            <p>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
+
+            <p>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
+
+            <blockquote>In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten.</blockquote>
+
+            <p>Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children —to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
+
+            <p class="story-highlight">This is more than a restaurant. <br><strong>It is a tribute.</strong></p>
+
+            <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
+
+            <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+          </div>
         </div>
-    </main>
- 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
+
+        <button id="togglePromiseBtn" class="story-toggle-btn" aria-expanded="false" aria-controls="promiseContent" style="margin-top:16px;">
+          The Nonna Lina Promise <span id="promiseArrow" aria-hidden="true">&#9662;</span>
+        </button>
+
+        <div id="promiseContent" class="story-content" aria-hidden="true" hidden>
+          <div class="story-body">
+            <div class="promise-lines" role="region" aria-label="Nonna Lina Promise">
+              <div class="l1">At NONNA LINA · Cucina Italiana</div>
+              <div class="l2">We bring classic Italian comfort to every plate.</div>
+              <div class="l3">Simple recipes. Quality ingredients. Familiar flavors.</div>
+            </div>
+
+            <hr class="story-divider">
+
+            <p><strong>Quality first:</strong> We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.</p>
+            <p><strong>Quality first:</strong> We use imported pasta and premium ingredients;Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli; to ensure authentic flavor.</p>
+
+            <p><strong>Simple recipes:</strong> Our sauces; Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese and Aglio & Olio; are straightforward and crafted to showcase those ingredients.</p>
+
+            <p><strong>Customizable plates:</strong> Choose a pasta and pair it with proteins and fresh vegetables for a satisfying, familiar meal.</p>
+
+            <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
+
+            <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
+
+            <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+          </div>
         </div>
-    </footer>
- 
-    <script>
-        const toggleBtn = document.getElementById("toggleStoryBtn");
-        const content = document.getElementById("storyContent");
-        const arrow = document.getElementById("storyArrow");
- 
-        toggleBtn.addEventListener("click", function() {
-            toggleBtn.classList.toggle("is-active");
-            
-            if (!content.classList.contains("is-open")) {
-                content.style.display = "block";
-                // Short timeout gives browser time to process display block layout shift before fading
-                setTimeout(() => {
-                    content.classList.add("is-open");
-                }, 10);
-                arrow.innerHTML = "&#9652;"; // Arrow points up
-            } else {
-                content.classList.remove("is-open");
-                content.style.display = "none";
-                arrow.innerHTML = "&#9662;"; // Arrow points down
-            }
-        });
-    </script>
- 
+      </div>
+
+      <div class="contact-card" role="region" aria-labelledby="contactTitle">
+        <h3 id="contactTitle">Francesco D’Angelo</h3>
+        <p class="title-sub">General Manager</p>
+
+        <div class="contact-item">
+          📞 <a href="tel:+14075369155">407.536.9155</a>
+        </div>
+        <div class="contact-item">
+          📧 <a href="mailto:Francesco@NonnaLina.us">Francesco@NonnaLina.us</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle helper
+    function setupToggle(buttonId, contentId, arrowId) {
+      const btn = document.getElementById(buttonId);
+      const content = document.getElementById(contentId);
+      const arrow = document.getElementById(arrowId);
+
+      btn.setAttribute('aria-expanded', 'false');
+      content.setAttribute('aria-hidden', 'true');
+      content.hidden = true;
+
+      btn.addEventListener("click", function() {
+        const isOpen = content.classList.contains("is-open");
+        btn.classList.toggle("is-active");
+        btn.setAttribute('aria-expanded', String(!isOpen));
+
+        if (!isOpen) {
+          content.hidden = false;
+          content.style.display = "block";
+          requestAnimationFrame(() => content.classList.add("is-open"));
+          content.setAttribute('aria-hidden', 'false');
+          arrow.innerHTML = "&#9652;";
+        } else {
+          content.classList.remove("is-open");
+          content.setAttribute('aria-hidden', 'true');
+          arrow.innerHTML = "&#9662;";
+          setTimeout(() => { content.style.display = "none"; content.hidden = true; }, 360);
+        }
+      });
+    }
+
+    setupToggle("toggleStoryBtn", "storyContent", "storyArrow");
+    setupToggle("togglePromiseBtn", "promiseContent", "promiseArrow");
+
+    // Auto-shrink logic for the subhead to fit exactly on one line
+    (function autoShrinkToFit(){
+      const el = document.getElementById('autoSubhead');
+
+      if (!el) return;
+
+      const STYLE_PROP = 'fontSize';
+      const computed = getComputedStyle(el);
+      let maxSizePx = parseFloat(computed.fontSize) || 20;
+      const minSizePx = 10;
+      const step = 0.5;
+
+      // set initial to computed (CSS) value
+      function setSize(px){ el.style[STYLE_PROP] = px + 'px'; }
+
+      function fits(){
+        // Because white-space: nowrap, compare scrollWidth to parent width
+        const parentWidth = el.parentElement.clientWidth;
+        return el.scrollWidth <= parentWidth;
+      }
+
+      // Start from maxSizePx, reduce until fits or min reached
+      setSize(maxSizePx);
+
+      function shrinkStep(){
+        const current = parseFloat(getComputedStyle(el).fontSize);
+        if (fits() || current <= minSizePx) {
+          if (!fits() && current <= minSizePx) setSize(minSizePx);
+          return;
+        }
+        setSize(Math.max(minSizePx, current - step));
+        // continue after layout update
+        requestAnimationFrame(shrinkStep);
+      }
+
+      // Wait for fonts to load to ensure correct measurement
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => requestAnimationFrame(shrinkStep));
+      } else {
+        requestAnimationFrame(shrinkStep);
+      }
+
+      // Re-run on resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // restore to starting size then shrink again
+          setSize(maxSizePx);
+          requestAnimationFrame(shrinkStep);
+        }, 120);
+      });
+    })();
+  </script>
+
 </body>
 </html>
-
+0 commit comments
+Comments
+0
+ (0)
+Comment
