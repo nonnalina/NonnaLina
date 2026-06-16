@@ -1,156 +1,288 @@
-Updated index.html with logo src set to assets/square.svg and "OPENING SOON" (removed "IN CENTRAL FLORIDA"). Replace your current index.html with this file:
-
-```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home — My Restaurant</title>
+  <title>Nonna Lina | Cucina Italiana</title>
   <style>
-    :root{--bg:#fff;--fg:#111;--accent:#d97706;--panel-w:320px}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
-    header{height:80px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid #eee}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
-    .brand img{height:56px;width:auto}
-    .spacer{flex:1}
-    .menu-btn{background:transparent;border:0;padding:8px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:8px}
-    .menu-btn:focus{outline:3px solid rgba(217,119,6,0.18);outline-offset:2px}
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-    /* off-canvas */
-    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.24);display:none;z-index:15}
-    .panel{position:fixed;top:0;right:0;height:100vh;width:var(--panel-w);background:var(--bg);box-shadow:-8px 0 24px rgba(0,0,0,0.08);transform:translateX(100%);transition:transform .25s;z-index:16;padding:16px;display:flex;flex-direction:column}
-    .panel.open{transform:translateX(0)} .panel h2{margin:0 0 8px 0}
-    nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
-    nav a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;text-decoration:none;color:inherit}
-    nav a:hover, nav a:focus{background:#f3f4f6}
-    .icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center}
-    main{padding:28px 20px;max-width:980px;margin:0 auto}
-    .hero{display:grid;gap:8px;align-items:center}
-    .kicker{color:#d97706;font-weight:700}
-    .title{font-size:2rem;line-height:1.05;margin:0}
-    .quote{font-style:italic;color:#333;margin:8px 0}
-    .blurb{color:#444;max-width:64ch}
-    .specials{margin-top:18px;padding:12px;border-radius:10px;background:#fffaf0;border:1px solid #fde4c7}
-    .specials h3{margin:0 0 8px 0}
-    .specials p{margin:0;line-height:1.3}
-    footer{padding:16px;text-align:center;border-top:1px solid #eee;margin-top:28px}
-    @media(min-width:900px){
-      .hero{grid-template-columns:1fr 360px;gap:28px}
-      .title{font-size:2.6rem}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:#2b2b2b;background:#fbf9f3;display:flex;flex-direction:column;min-height:100vh}
+    .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
+    header{padding:40px 0 20px}
+    .logo-img{max-width:100%;width:380px;height:auto;display:block;margin:0 auto}
+    main{flex:1;padding:20px 0 40px}
+    .coming-soon-badge{display:inline-block;background:#008C45;color:#fff;padding:6px 16px;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:50px;margin-bottom:20px}
+    .hero-block{margin-bottom:15px}
+    .hero-line{font-size:2rem;color:#8D1D24;font-weight:700;margin-bottom:8px}
+    .auto-subhead-wrap{width:100%;display:block}
+    .subhead{font-size:20px;line-height:1;margin:0 0 14px 0;white-space:nowrap;overflow:hidden;text-overflow:clip;display:inline-block;font-weight:500;color:#8D1D24;max-width:100%}
+    .description-text{font-size:1.1rem;color:#4a4a4a;margin-bottom:30px}
+    .menu-preview{background:#fff;padding:25px;border-radius:12px;border:1px solid #e6dec9;margin-bottom:25px;box-shadow:0 4px 10px rgba(0,0,0,.02)}
+    .menu-preview h2{font-size:1.3rem;color:#008C45;margin-bottom:15px;text-transform:uppercase;letter-spacing:1px}
+    .menu-items{font-size:1.1rem;color:#555;line-height:1.8}
+
+    /* layout */
+    .story-container{margin-bottom:35px;text-align:left}
+    .story-flex{display:flex;gap:20px;align-items:flex-start}
+    /* Collapsible menu control */
+    .menu-toggle {
+      width:100%; display:flex; align-items:center; justify-content:space-between;
+      background:#fff;border:1px solid #e6dec9;color:#8D1D24;padding:12px 14px;border-radius:12px;cursor:pointer;font-weight:700;
     }
+    .menu-toggle[aria-expanded="true"]{background:#8D1D24;color:#fff;border-color:#8D1D24}
+    .menu-panel{
+      margin-top:8px;background:#fff;border:1px solid #e6dec9;border-radius:12px;overflow:hidden;max-height:0;transition:max-height .28s ease,padding .18s ease;
+    }
+    .menu-panel.open{padding:10px;border-radius:12px;max-height:600px}
+    .menu-list{display:flex;flex-direction:column;gap:8px}
+    .menu-item{
+      background:#fff;border:1px solid #eee;color:#333;padding:10px 12px;border-radius:8px;cursor:pointer;text-align:left;
+    }
+    .menu-item[aria-selected="true"]{background:#8D1D24;color:#fff;border-color:#8D1D24}
+    .story-panel{flex:1;background:#fff;border-radius:12px;border:1px solid #e6dec9;box-shadow:0 4px 10px rgba(0,0,0,.02);padding:24px;display:block;min-height:160px}
+    .story-subtitle{font-style:italic;color:#666;margin-bottom:20px;font-size:1.05rem}
+    .story-divider{border:0;height:1px;background:#e6dec9;margin:20px 0}
+    .story-body p{margin-bottom:18px;font-size:1.05rem;color:#333;line-height:1.7}
+    .story-body blockquote{font-style:italic;border-left:3px solid #008C45;margin:25px 0;padding-left:15px;color:#555}
+    .story-highlight{font-size:1.25rem;margin:25px 0;color:#222}
+    .story-slogan{font-weight:700;color:#8D1D24;margin-top:30px;border-top:1px solid #e6dec9;padding-top:20px;font-size:1.1rem}
+    @media(max-width:640px){
+      .story-flex{flex-direction:column}
+      .logo-img{width:260px}
+      .subhead{font-size:16px}
+      .menu-toggle{border-radius:12px}
+    }
+
+    /* New: hide contentPanel when empty */
+    #contentPanel{display:none;}
   </style>
 </head>
 <body>
   <header>
-    <button id="siteMenuBtn" class="menu-btn" aria-label="Main menu" aria-expanded="false" aria-controls="sitePanel">
-      <span class="hamburger" aria-hidden="true">☰</span>
-      <span class="visually-hidden">Menu</span>
-    </button>
-
-    <div class="brand">
-      <img src="assets/square.svg" alt="My Restaurant logo" />
-      <div>
-        <div class="kicker">OPENING SOON</div>
-        <div style="font-weight:700">A Taste of Italy is on<br>the Way</div>
-      </div>
+    <div class="container">
+      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
     </div>
-
-    <div class="spacer"></div>
-
-    <a class="menu-btn" href="menu.html" aria-label="Food menu">
-      <span class="icon" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="10" cy="12" r="6" stroke="currentColor" stroke-width="2"></circle>
-          <path d="M18 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-          <path d="M20 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-        </svg>
-      </span>
-      <span>Menu</span>
-    </a>
   </header>
 
-  <div id="backdrop" class="backdrop" hidden></div>
-
-  <aside id="sitePanel" class="panel" role="dialog" aria-labelledby="panelTitle" aria-modal="true" hidden>
-    <div style="display:flex;align-items:center;gap:12px">
-      <h2 id="panelTitle">Menu</h2>
-      <button id="closePanelBtn" aria-label="Close menu" style="margin-left:auto;background:transparent;border:0;font-size:18px;cursor:pointer">✕</button>
-    </div>
-
-    <nav aria-label="Main site navigation">
-      <ul>
-        <li>
-          <a href="menu.html" aria-label="Food menu">
-            <span class="icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="10" cy="12" r="6" stroke="currentColor" stroke-width="2"></circle>
-                <path d="M18 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                <path d="M20 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-              </svg>
-            </span>
-            <span>Menu</span>
-          </a>
-        </li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="index.html#reservations">Reservations</a></li>
-      </ul>
-    </nav>
-  </aside>
-
   <main>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div>
-        <h1 id="heroTitle" class="title">A Taste of Italy is on<br>the Way</h1>
-        <p class="quote">“Great food doesn’t need to be<br>complicated - Just real”</p>
-        <p class="blurb">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+    <div class="container">
+      <div class="coming-soon-badge" aria-hidden="true">Opening Soon · Central Florida</div>
+
+      <div class="hero-block" role="heading" aria-level="1">
+        <div class="hero-line">A Taste of Italy is on the Way</div>
+        <div class="auto-subhead-wrap" aria-hidden="false">
+          <div id="autoSubhead" class="subhead" role="text" aria-label="Tagline">
+            “Great food doesn’t need to be complicated — Just real.”
+          </div>
+        </div>
       </div>
 
-      <aside class="specials" aria-label="Our specialties">
-        <h3>OUR SPECIALTIES</h3>
-        <p>
+      <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+
+      <div class="menu-preview" role="region" aria-labelledby="menuTitle">
+        <h2 id="menuTitle">Our Specialties</h2>
+        <p class="menu-items" aria-label="Menu items list">
           Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
           Fresh Salads • Gourmet Panini • Sicilian Cannoli
         </p>
-      </aside>
-    </section>
+      </div>
 
-    <section id="about" style="margin-top:22px">
-      <h2>About</h2>
-      <p>Short about text.</p>
-    </section>
+      <div class="story-container">
+        <div class="story-flex" role="region" aria-label="Story and Promise menu">
+          <div style="min-width:220px">
+            <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel">
+              Menu
+              <span id="menuCaret" aria-hidden="true">▾</span>
+            </button>
 
-    <section id="contact" style="margin-top:18px">
-      <h2>Contact</h2>
-      <p>Sample contact info.</p>
-    </section>
+            <div id="menuPanel" class="menu-panel" aria-hidden="true">
+              <div class="menu-list" role="listbox" aria-label="Story menu" tabindex="0">
+                <div class="menu-item" role="option" data-key="story" aria-selected="false" tabindex="0">The Story Of Nonna Lina</div>
+                <div class="menu-item" role="option" data-key="promise" aria-selected="false" tabindex="0">The Nonna Lina Promise</div>
+                <!-- Add more items by duplicating the .menu-item and adding corresponding content_<key> below -->
+              </div>
+            </div>
+          </div>
 
-    <section id="reservations" style="margin-top:18px">
-      <h2>Reservations</h2>
-      <p>Sample reservations note.</p>
-    </section>
+          <div id="contentPanel" class="story-panel" role="region" aria-live="polite" tabindex="-1">
+            <!-- All content blocks start hidden. They will be shown when a menu item is selected -->
+            <div id="content_story" class="content-entry" style="display:none">
+              <div class="story-body">
+                <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
+                <hr class="story-divider">
+                <p>Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
+                <p>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
+                <p>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
+                <blockquote>In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten.</blockquote>
+                <p>Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children —to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
+                <p class="story-highlight">This is more than a restaurant. <br><strong>It is a tribute.</strong></p>
+                <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
+                <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+              </div>
+            </div>
+
+            <div id="content_promise" class="content-entry" style="display:none">
+              <div class="story-body">
+                <div class="promise-lines" role="region" aria-label="Nonna Lina Promise">
+                  <div class="l1">At NONNA LINA · Cucina Italiana</div>
+                  <div class="l2">We bring classic Italian comfort to every plate.</div>
+                  <div class="l3">Simple recipes. Quality ingredients. Familiar flavors.</div>
+                </div>
+                <hr class="story-divider">
+                <p><strong>Quality first:</strong> We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.</p>
+                <p><strong>Quality first:</strong> We use imported pasta and premium ingredients;Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli; to ensure authentic flavor.</p>
+                <p><strong>Simple recipes:</strong> Our sauces; Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese and Aglio & Olio; are straightforward and crafted to showcase those ingredients.</p>
+                <p><strong>Customizable plates:</strong> Choose a pasta and pair it with proteins and fresh vegetables for a satisfying, familiar meal.</p>
+                <p><strong>Italian favorites:</strong> We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.</p>
+                <p><strong>Warm hospitality:</strong> We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.</p>
+                <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+              </div>
+            </div>
+
+            <!-- Example placeholder for future items (hidden) -->
+            <div id="content_extras" class="content-entry" style="display:none">
+              <div class="story-body">
+                <p class="story-subtitle">Our Family Recipes</p>
+                <hr class="story-divider">
+                <p>Placeholder content for adding more menu-driven pages. Replace this with actual text, images, or markup.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card" role="region" aria-labelledby="contactTitle">
+        <h3 id="contactTitle">Francesco D’Angelo</h3>
+        <p class="title-sub">General Manager</p>
+        <div class="contact-item">📞 <a href="tel:+14075369155">407.536.9155</a></div>
+        <div class="contact-item">📧 <a href="mailto:Francesco@NonnaLina.us">Francesco@NonnaLina.us</a></div>
+      </div>
+    </div>
   </main>
 
   <footer>
-    <small>&copy; <span id="year"></span> My Restaurant</small>
+    <div class="container">
+      <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
+    </div>
   </footer>
 
   <script>
-    const btn = document.getElementById('siteMenuBtn');
-    const panel = document.getElementById('sitePanel');
-    const backdrop = document.getElementById('backdrop');
-    const closeBtn = document.getElementById('closePanelBtn');
+    // Collapsible menu + item selection logic (no content visible on load)
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const menuPanel = document.getElementById('menuPanel');
+      const menuCaret = document.getElementById('menuCaret');
+      const menuList = menuPanel.querySelector('.menu-list');
+      const items = Array.from(menuList.querySelectorAll('.menu-item'));
+      const contentPanel = document.getElementById('contentPanel');
+      const contentMap = {
+        story: document.getElementById('content_story'),
+        promise: document.getElementById('content_promise'),
+        extras: document.getElementById('content_extras')
+      };
 
-    function openPanel(){ panel.removeAttribute('hidden'); backdrop.removeAttribute('hidden'); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); const first = panel.querySelector('a,button'); if(first) first.focus(); }
-    function closePanel(){ panel.classList.remove('open'); panel.setAttribute('hidden',''); backdrop.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); btn.focus(); }
+      function setMenuOpen(open){
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuPanel.setAttribute('aria-hidden', String(!open));
+        if(open){
+          menuPanel.classList.add('open');
+          menuCaret.textContent = '▴';
+        } else {
+          menuPanel.classList.remove('open');
+          menuCaret.textContent = '▾';
+        }
+      }
 
-    btn.addEventListener('click', ()=> { const expanded = btn.getAttribute('aria-expanded') === 'true'; if(expanded) closePanel(); else openPanel(); });
-    closeBtn.addEventListener('click', closePanel);
-    backdrop.addEventListener('click', closePanel);
-    document.addEventListener('keydown', (e)=> { if(e.key==='Escape' && !panel.hasAttribute('hidden')) closePanel(); if(e.altKey && e.key.toLowerCase()==='m'){ e.preventDefault(); openPanel(); } });
-    document.getElementById('year').textContent = new Date().getFullYear();
+      function clearSelection(){
+        items.forEach(i=> i.setAttribute('aria-selected','false'));
+        Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
+        contentPanel.style.display = 'none';
+      }
+
+      // Toggle button: open when closed; if open, close and clear selection (return to regular page)
+      menuToggle.addEventListener('click', ()=>{
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen){
+          setMenuOpen(true);
+        } else {
+          setMenuOpen(false);
+          if(items.some(i=> i.getAttribute('aria-selected')==='true')){
+            clearSelection();
+          }
+        }
+      });
+
+      menuToggle.addEventListener('keydown', (e)=>{
+        if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); setMenuOpen(true); items[0]?.focus(); }
+      });
+
+      function selectItem(el){
+        const key = el.dataset.key;
+        items.forEach(i=> i.setAttribute('aria-selected', String(i===el)));
+        // hide all content entries
+        Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
+        if(contentMap[key]) {
+          contentMap[key].style.display = 'block';
+          // show panel container
+          contentPanel.style.display = 'block';
+          // move focus to content panel for accessibility
+          contentPanel.focus();
+        } else {
+          // hide panel if no content
+          contentPanel.style.display = 'none';
+        }
+        setMenuOpen(false);
+      }
+
+      items.forEach(it=>{
+        it.addEventListener('click', ()=> selectItem(it));
+        it.addEventListener('keydown', (e)=>{
+          const idx = items.indexOf(it);
+          if(e.key==='ArrowDown'){ items[(idx+1)%items.length].focus(); e.preventDefault();}
+          else if(e.key==='ArrowUp'){ items[(idx-1+items.length)%items.length].focus(); e.preventDefault();}
+          else if(e.key==='Home'){ items[0].focus(); e.preventDefault(); }
+          else if(e.key==='End'){ items[items.length-1].focus(); e.preventDefault(); }
+          else if(e.key==='Enter' || e.key===' '){ selectItem(it); e.preventDefault(); }
+          else if(e.key==='Escape'){ setMenuOpen(false); menuToggle.focus(); }
+        });
+      });
+
+      // Ensure nothing selected and all contents hidden on load
+      clearSelection();
+
+      // Close menu when clicking outside; hide panel if nothing selected
+      document.addEventListener('click', (e)=>{
+        if(!menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+          setMenuOpen(false);
+          if(!items.some(i=> i.getAttribute('aria-selected')==='true')) {
+            contentPanel.style.display = 'none';
+          }
+        }
+      });
+    })();
+
+    // Auto-shrink subhead (same behavior as original)
+    (function autoShrinkToFit(){
+      const el = document.getElementById('autoSubhead');
+      if(!el) return;
+      const STYLE_PROP='fontSize';
+      const computed=getComputedStyle(el);
+      let maxSizePx=parseFloat(computed.fontSize)||20;
+      const minSizePx=10; const step=0.5;
+      function setSize(px){ el.style[STYLE_PROP]=px+'px'; }
+      function fits(){ return el.scrollWidth <= el.parentElement.clientWidth; }
+      setSize(maxSizePx);
+      function shrinkStep(){
+        const current=parseFloat(getComputedStyle(el).fontSize);
+        if(fits()||current<=minSizePx){ if(!fits()&&current<=minSizePx)setSize(minSizePx); return; }
+        setSize(Math.max(minSizePx,current-step));
+        requestAnimationFrame(shrinkStep);
+      }
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>requestAnimationFrame(shrinkStep));
+      else requestAnimationFrame(shrinkStep);
+      let resizeTimer;
+      window.addEventListener('resize', ()=>{ clearTimeout(resizeTimer); resizeTimer=setTimeout(()=>{ setSize(maxSizePx); requestAnimationFrame(shrinkStep); },120); });
+    })();
   </script>
 </body>
 </html>
-```
