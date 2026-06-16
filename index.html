@@ -193,7 +193,25 @@
         }
       }
 
-      menuToggle.addEventListener('click', ()=> setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='true'));
+      function clearSelection(){
+        items.forEach(i=> i.setAttribute('aria-selected','false'));
+        Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
+        contentPanel.style.display = 'none';
+      }
+
+      // Toggle button: open when closed; if open, close and clear selection (return to regular page)
+      menuToggle.addEventListener('click', ()=>{
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen){
+          setMenuOpen(true);
+        } else {
+          setMenuOpen(false);
+          if(items.some(i=> i.getAttribute('aria-selected')==='true')){
+            clearSelection();
+          }
+        }
+      });
+
       menuToggle.addEventListener('keydown', (e)=>{
         if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); setMenuOpen(true); items[0]?.focus(); }
       });
@@ -230,9 +248,7 @@
       });
 
       // Ensure nothing selected and all contents hidden on load
-      items.forEach(i=> i.setAttribute('aria-selected','false'));
-      Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
-      contentPanel.style.display = 'none';
+      clearSelection();
 
       // Close menu when clicking outside; hide panel if nothing selected
       document.addEventListener('click', (e)=>{
