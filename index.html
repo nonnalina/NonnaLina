@@ -1,3 +1,6 @@
+Updated index.html with logo src set to assets/square.svg and "OPENING SOON" (removed "IN CENTRAL FLORIDA"). Replace your current index.html with this file:
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,8 +10,10 @@
   <style>
     :root{--bg:#fff;--fg:#111;--accent:#d97706;--panel-w:320px}
     *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
-    header{height:64px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #eee}
-    .brand{font-weight:700} .spacer{flex:1}
+    header{height:80px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid #eee}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .brand img{height:56px;width:auto}
+    .spacer{flex:1}
     .menu-btn{background:transparent;border:0;padding:8px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:8px}
     .menu-btn:focus{outline:3px solid rgba(217,119,6,0.18);outline-offset:2px}
     .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
@@ -20,8 +25,20 @@
     nav a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;text-decoration:none;color:inherit}
     nav a:hover, nav a:focus{background:#f3f4f6}
     .icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center}
-    main{padding:20px;max-width:900px;margin:0 auto}
-    footer{padding:16px;text-align:center;border-top:1px solid #eee;margin-top:24px}
+    main{padding:28px 20px;max-width:980px;margin:0 auto}
+    .hero{display:grid;gap:8px;align-items:center}
+    .kicker{color:#d97706;font-weight:700}
+    .title{font-size:2rem;line-height:1.05;margin:0}
+    .quote{font-style:italic;color:#333;margin:8px 0}
+    .blurb{color:#444;max-width:64ch}
+    .specials{margin-top:18px;padding:12px;border-radius:10px;background:#fffaf0;border:1px solid #fde4c7}
+    .specials h3{margin:0 0 8px 0}
+    .specials p{margin:0;line-height:1.3}
+    footer{padding:16px;text-align:center;border-top:1px solid #eee;margin-top:28px}
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 360px;gap:28px}
+      .title{font-size:2.6rem}
+    }
   </style>
 </head>
 <body>
@@ -31,7 +48,14 @@
       <span class="visually-hidden">Menu</span>
     </button>
 
-    <div class="brand">My Restaurant</div>
+    <div class="brand">
+      <img src="assets/square.svg" alt="My Restaurant logo" />
+      <div>
+        <div class="kicker">OPENING SOON</div>
+        <div style="font-weight:700">A Taste of Italy is on<br>the Way</div>
+      </div>
+    </div>
+
     <div class="spacer"></div>
 
     <a class="menu-btn" href="menu.html" aria-label="Food menu">
@@ -76,20 +100,33 @@
   </aside>
 
   <main>
-    <h1>Welcome</h1>
-    <p>This is the homepage. Use the top-left hamburger to open site navigation, or click "Menu" to go to the food page.</p>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <h1 id="heroTitle" class="title">A Taste of Italy is on<br>the Way</h1>
+        <p class="quote">“Great food doesn’t need to be<br>complicated - Just real”</p>
+        <p class="blurb">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+      </div>
 
-    <section id="about">
-      <h2>About</h2>
-      <p>Sample about content.</p>
+      <aside class="specials" aria-label="Our specialties">
+        <h3>OUR SPECIALTIES</h3>
+        <p>
+          Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
+          Fresh Salads • Gourmet Panini • Sicilian Cannoli
+        </p>
+      </aside>
     </section>
 
-    <section id="contact">
+    <section id="about" style="margin-top:22px">
+      <h2>About</h2>
+      <p>Short about text.</p>
+    </section>
+
+    <section id="contact" style="margin-top:18px">
       <h2>Contact</h2>
       <p>Sample contact info.</p>
     </section>
 
-    <section id="reservations">
+    <section id="reservations" style="margin-top:18px">
       <h2>Reservations</h2>
       <p>Sample reservations note.</p>
     </section>
@@ -105,10 +142,7 @@
     const backdrop = document.getElementById('backdrop');
     const closeBtn = document.getElementById('closePanelBtn');
 
-    function openPanel(){
-      panel.removeAttribute('hidden'); backdrop.removeAttribute('hidden'); panel.classList.add('open');
-      btn.setAttribute('aria-expanded','true'); const first = panel.querySelector('a,button'); if(first) first.focus();
-    }
+    function openPanel(){ panel.removeAttribute('hidden'); backdrop.removeAttribute('hidden'); panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); const first = panel.querySelector('a,button'); if(first) first.focus(); }
     function closePanel(){ panel.classList.remove('open'); panel.setAttribute('hidden',''); backdrop.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); btn.focus(); }
 
     btn.addEventListener('click', ()=> { const expanded = btn.getAttribute('aria-expanded') === 'true'; if(expanded) closePanel(); else openPanel(); });
@@ -119,3 +153,4 @@
   </script>
 </body>
 </html>
+```
