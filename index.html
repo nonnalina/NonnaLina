@@ -52,6 +52,9 @@
       .subhead{font-size:16px}
       .menu-toggle{border-radius:12px}
     }
+
+    /* New: hide contentPanel when empty */
+    #contentPanel{display:none;}
   </style>
 </head>
 <body>
@@ -171,6 +174,7 @@
       const menuCaret = document.getElementById('menuCaret');
       const menuList = menuPanel.querySelector('.menu-list');
       const items = Array.from(menuList.querySelectorAll('.menu-item'));
+      const contentPanel = document.getElementById('contentPanel');
       const contentMap = {
         story: document.getElementById('content_story'),
         promise: document.getElementById('content_promise'),
@@ -201,8 +205,13 @@
         Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
         if(contentMap[key]) {
           contentMap[key].style.display = 'block';
+          // show panel container
+          contentPanel.style.display = 'block';
           // move focus to content panel for accessibility
-          contentMap[key].parentElement?.focus();
+          contentPanel.focus();
+        } else {
+          // hide panel if no content
+          contentPanel.style.display = 'none';
         }
         setMenuOpen(false);
       }
@@ -223,10 +232,16 @@
       // Ensure nothing selected and all contents hidden on load
       items.forEach(i=> i.setAttribute('aria-selected','false'));
       Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
+      contentPanel.style.display = 'none';
 
-      // Close menu when clicking outside
+      // Close menu when clicking outside; hide panel if nothing selected
       document.addEventListener('click', (e)=>{
-        if(!menuPanel.contains(e.target) && !menuToggle.contains(e.target)) setMenuOpen(false);
+        if(!menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+          setMenuOpen(false);
+          if(!items.some(i=> i.getAttribute('aria-selected')==='true')) {
+            contentPanel.style.display = 'none';
+          }
+        }
       });
     })();
 
