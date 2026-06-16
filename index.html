@@ -33,13 +33,13 @@
     .menu-panel{
       margin-top:8px;background:#fff;border:1px solid #e6dec9;border-radius:12px;overflow:hidden;max-height:0;transition:max-height .28s ease,padding .18s ease;
     }
-    .menu-panel.open{padding:10px;border-radius:12px;max-height:600px} /* large enough for many items */
+    .menu-panel.open{padding:10px;border-radius:12px;max-height:600px}
     .menu-list{display:flex;flex-direction:column;gap:8px}
     .menu-item{
       background:#fff;border:1px solid #eee;color:#333;padding:10px 12px;border-radius:8px;cursor:pointer;text-align:left;
     }
     .menu-item[aria-selected="true"]{background:#8D1D24;color:#fff;border-color:#8D1D24}
-    .story-panel{flex:1;background:#fff;border-radius:12px;border:1px solid #e6dec9;box-shadow:0 4px 10px rgba(0,0,0,.02);padding:24px;display:block}
+    .story-panel{flex:1;background:#fff;border-radius:12px;border:1px solid #e6dec9;box-shadow:0 4px 10px rgba(0,0,0,.02);padding:24px;display:block;min-height:160px}
     .story-subtitle{font-style:italic;color:#666;margin-bottom:20px;font-size:1.05rem}
     .story-divider{border:0;height:1px;background:#e6dec9;margin:20px 0}
     .story-body p{margin-bottom:18px;font-size:1.05rem;color:#333;line-height:1.7}
@@ -94,18 +94,16 @@
 
             <div id="menuPanel" class="menu-panel" aria-hidden="true">
               <div class="menu-list" role="listbox" aria-label="Story menu" tabindex="0">
-                <!-- Add items here. Add more .menu-item blocks to include more entries -->
-                <div class="menu-item" role="option" data-key="story" aria-selected="true" tabindex="0">THE STORY OF NONNA LINA</div>
+                <div class="menu-item" role="option" data-key="story" aria-selected="false" tabindex="0">THE STORY OF NONNA LINA</div>
                 <div class="menu-item" role="option" data-key="promise" aria-selected="false" tabindex="0">The Nonna Lina Promise</div>
-                <!-- Example additional item -->
-                <!-- <div class="menu-item" role="option" data-key="extras" aria-selected="false" tabindex="0">Our Family Recipes</div> -->
+                <!-- Add more items by duplicating the .menu-item and adding corresponding content_<key> below -->
               </div>
             </div>
           </div>
 
-          <div id="contentPanel" class="story-panel" role="region" aria-live="polite">
-            <!-- content for currently selected menu item will be injected here -->
-            <div id="content_story" class="content-entry">
+          <div id="contentPanel" class="story-panel" role="region" aria-live="polite" tabindex="-1">
+            <!-- All content blocks start hidden. They will be shown when a menu item is selected -->
+            <div id="content_story" class="content-entry" style="display:none">
               <div class="story-body">
                 <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
                 <hr class="story-divider">
@@ -138,7 +136,7 @@
               </div>
             </div>
 
-            <!-- Example placeholder for future items -->
+            <!-- Example placeholder for future items (hidden) -->
             <div id="content_extras" class="content-entry" style="display:none">
               <div class="story-body">
                 <p class="story-subtitle">Our Family Recipes</p>
@@ -166,7 +164,7 @@
   </footer>
 
   <script>
-    // Collapsible menu + item selection logic
+    // Collapsible menu + item selection logic (no content visible on load)
     (function(){
       const menuToggle = document.getElementById('menuToggle');
       const menuPanel = document.getElementById('menuPanel');
@@ -178,7 +176,7 @@
         promise: document.getElementById('content_promise'),
         extras: document.getElementById('content_extras')
       };
-      // Toggle open/close
+
       function setMenuOpen(open){
         menuToggle.setAttribute('aria-expanded', String(open));
         menuPanel.setAttribute('aria-hidden', String(!open));
@@ -190,24 +188,25 @@
           menuCaret.textContent = '▾';
         }
       }
+
       menuToggle.addEventListener('click', ()=> setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='true'));
       menuToggle.addEventListener('keydown', (e)=>{
-        if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); setMenuOpen(true); items[0].focus(); }
+        if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); setMenuOpen(true); items[0]?.focus(); }
       });
 
-      // Select item function
       function selectItem(el){
         const key = el.dataset.key;
-        // update aria-selected
         items.forEach(i=> i.setAttribute('aria-selected', String(i===el)));
-        // hide all content entries then show selected
+        // hide all content entries
         Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
-        if(contentMap[key]) contentMap[key].style.display = 'block';
-        // close menu (optional: keep open on mobile if you prefer)
+        if(contentMap[key]) {
+          contentMap[key].style.display = 'block';
+          // move focus to content panel for accessibility
+          contentMap[key].parentElement?.focus();
+        }
         setMenuOpen(false);
       }
 
-      // Wire up clicks and keyboard for items
       items.forEach(it=>{
         it.addEventListener('click', ()=> selectItem(it));
         it.addEventListener('keydown', (e)=>{
@@ -221,19 +220,17 @@
         });
       });
 
-      // initialize: ensure only story shown
-      selectItem(items.find(i=> i.dataset.key==='story') || items[0]);
+      // Ensure nothing selected and all contents hidden on load
+      items.forEach(i=> i.setAttribute('aria-selected','false'));
+      Object.values(contentMap).forEach(c => { if(c) c.style.display = 'none'; });
 
       // Close menu when clicking outside
       document.addEventListener('click', (e)=>{
         if(!menuPanel.contains(e.target) && !menuToggle.contains(e.target)) setMenuOpen(false);
       });
-
-      // Allow adding new menu items programmatically:
-      // function addMenuItem(key, label, contentHtml) { ... } (not included here but can be added)
     })();
 
-    // Auto-shrink subhead (same as original)
+    // Auto-shrink subhead (same behavior as original)
     (function autoShrinkToFit(){
       const el = document.getElementById('autoSubhead');
       if(!el) return;
