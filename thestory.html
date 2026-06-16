@@ -1,0 +1,134 @@
+Understood — I'll provide a standalone static HTML/CSS page you can drop into your GitHub repo. Assumptions: modern responsive layout, Google Fonts (Merriweather for headings, Open Sans for body), placeholder image paths you can replace, and a simple hero, story section, and footer.
+
+Save as index.html and put any images in an /assets/ folder (logo.png, nonna.jpg).
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NONNA LINA - Cucina Italiana</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fbf7f3;
+      --card:#fff;
+      --accent:#8b2e18;
+      --muted:#6b6b6b;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:32px;}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{height:56px;width:auto;border-radius:8px;object-fit:cover}
+    .brand h1{font-family:"Merriweather",serif;margin:0;font-size:20px;color:var(--accent);letter-spacing:0.6px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:32px;
+      align-items:center;
+      margin:28px 0 40px;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+      border-radius:14px;
+      padding:36px;
+      box-shadow:0 8px 30px rgba(30,30,30,0.06);
+    }
+    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(139,46,24,0.08);color:var(--accent);font-weight:700;font-size:12px}
+    h2{font-family:"Merriweather",serif;margin:14px 0;color:var(--accent);font-size:34px;line-height:1.05}
+    p.lead{color:#333;font-size:16px;line-height:1.6;margin:0}
+    .photo{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+    .photo img{display:block;width:100%;height:100%;object-fit:cover}
+    .story{
+      margin-top:18px;
+      display:grid;
+      gap:18px;
+      grid-template-columns:repeat(2,1fr);
+    }
+    .story p{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(20,20,20,0.04);margin:0}
+    .story p small{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+    .tribute{grid-column:1/-1;background:linear-gradient(90deg,rgba(139,46,24,0.06),transparent);padding:20px;border-radius:10px}
+    footer{margin:40px 0 20px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    .cta{display:inline-block;padding:10px 16px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;font-weight:700}
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr; }
+      .story{grid-template-columns:1fr}
+      .brand img{height:48px}
+      h2{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="assets/logo.png" alt="Nonna Lina logo">
+        <div>
+          <h1>NONNA LINA</h1>
+          <p>Cucina Italiana</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#visit">Visit</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="story">
+      <div class="hero-card">
+        <span class="eyebrow">From Sicily with love</span>
+        <h2>NONNA LINA — A story of love, memory, and tradition</h2>
+        <p class="lead">"Nonna Lina - Cucina Italiana" was born from love, memory, and tradition. Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
+
+        <div class="story" style="margin-top:18px;">
+          <p><small>Everyday cooking</small>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
+
+          <p><small>The son’s journey</small>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
+
+          <div class="tribute">
+            <strong>In loving memory</strong>
+            <p style="margin:8px 0 0;">In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten. Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children—to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
+          </div>
+
+          <p><small>Our promise</small>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home. Great food doesn’t need to be complicated — Just real.</p>
+        </div>
+      </div>
+
+      <aside class="photo" aria-hidden="true">
+        <img src="assets/nonna.jpg" alt="Portrait of Nonna Lina">
+      </aside>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> NONNA LINA — Cucina Italiana</div>
+      <div>
+        <a class="cta" href="#visit">Visit Us</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+```
+
+Replace assets/logo.png and assets/nonna.jpg with your files. Tell me if you want alternate color palette, additional sections (menu, reservations), or a React version.
