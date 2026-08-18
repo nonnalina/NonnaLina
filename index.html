@@ -10,11 +10,22 @@
     body{font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:#2b2b2b;background:#fbf9f3;display:flex;flex-direction:column;min-height:100vh}
     
     .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
-    header.hero-header{padding:30px 0 10px}
-    .logo-img{max-width:100%;width:380px;height:auto;display:block;margin:0 auto 20px}
     
-    /* Navigation Bar under Logo */
-    .nav-container{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+    /* Sticky Header Container */
+    header.hero-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#fbf9f3;
+      padding:15px 0 10px;
+      border-bottom:1px solid #e6dec9;
+      box-shadow:0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .logo-img{max-width:100%;width:260px;height:auto;display:block;margin:0 auto 10px}
+    
+    /* Navigation Bar */
+    .nav-container{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
     
     /* Navigation Link Buttons */
     .nav-link{
@@ -23,8 +34,8 @@
       border:none;
       font-family:inherit;
       font-weight:700;
-      font-size:0.9rem;
-      padding:10px 16px;
+      font-size:0.85rem;
+      padding:8px 14px;
       border-radius:8px;
       cursor:pointer;
       transition:background-color 0.2s ease, transform 0.1s ease;
@@ -39,7 +50,7 @@
     }
     .home-btn:hover{background:#333333}
 
-    main{flex:1;padding:10px 0 40px}
+    main{flex:1;padding:30px 0 40px}
     .coming-soon-badge{display:inline-block;background:#008C45;color:#fff;padding:6px 16px;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:50px;margin-bottom:20px}
     .hero-block{margin-bottom:15px}
     .hero-line{font-size:2rem;color:#8D1D24;font-weight:700;margin-bottom:8px}
@@ -86,20 +97,20 @@
     footer{padding:20px 0;text-align:center;font-size:0.9rem;color:#777;border-top:1px solid #e6dec9}
 
     @media(max-width:640px){
-      .logo-img{width:260px}
+      .logo-img{width:200px}
       .subhead{font-size:16px}
-      .nav-link{font-size:0.85rem;padding:8px 12px;width:100%;text-align:center}
+      .nav-link{font-size:0.8rem;padding:7px 10px}
       .story-panel{padding:20px}
     }
   </style>
 </head>
 <body>
 
+  <!-- Sticky Header containing both Logo and Navigation -->
   <header class="hero-header">
     <div class="container">
-      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
+      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="260" height="260">
       
-      <!-- Navigation Bar directly under logo -->
       <nav class="nav-container">
         <button id="homeBtn" class="nav-link home-btn" onclick="goHome()">🏠 HOME</button>
         <button class="nav-link" onclick="toggleSection('story', this)">The Story Of Nonna Lina</button>
@@ -189,15 +200,22 @@
       const homeBtn = document.getElementById('homeBtn');
       const isAlreadyActive = targetSection.classList.contains('active-panel');
 
-      // Reset panels and button states
       resetView();
 
       if (!isAlreadyActive) {
         targetSection.classList.add('active-panel');
         btnElement.classList.add('active');
-        homeBtn.style.display = 'inline-block'; // Reveal HOME button when section opens
+        homeBtn.style.display = 'inline-block';
         
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll smoothly to section content below the sticky header
+        const headerOffset = 180;
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
     }
 
@@ -210,7 +228,7 @@
     function resetView() {
       document.querySelectorAll('.story-panel').forEach(panel => panel.classList.remove('active-panel'));
       document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-      document.getElementById('homeBtn').style.display = 'none'; // Hide HOME button on main view
+      document.getElementById('homeBtn').style.display = 'none';
       
       if (window.history && window.history.replaceState) {
         window.history.replaceState(null, null, window.location.pathname);
@@ -242,8 +260,3 @@
   </script>
 </body>
 </html>
-
-What this update achieves:
-⚬ Logo Integration: The menu buttons sit directly beneath the main logo image.
-⚬ Smart HOME Button: The 🏠 HOME button remains hidden initially to keep the clean main look, and dynamically appears as soon as a visitor opens either The Story or The Promise section.
-⚬ One-Click Reset: Clicking HOME closes all content panels, hides the HOME button, and smoothly scrolls the user back to the top of the page.
