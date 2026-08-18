@@ -6,12 +6,15 @@
   <title>Nonna Lina | Cucina Italiana</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scroll-padding-top:75px}
+    html{scroll-behavior:smooth}
     body{font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:#2b2b2b;background:#fbf9f3;display:flex;flex-direction:column;min-height:100vh}
     
-    /* Sticky Top Navigation Bar */
-    .sticky-header{position:sticky;top:0;z-index:1000;background:#fbf9f3;padding:12px 15px;border-bottom:1px solid #e6dec9;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-    .nav-container{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;max-width:700px;margin:0 auto}
+    .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
+    header.hero-header{padding:30px 0 10px}
+    .logo-img{max-width:100%;width:380px;height:auto;display:block;margin:0 auto 20px}
+    
+    /* Navigation Bar under Logo */
+    .nav-container{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}
     
     /* Navigation Link Buttons */
     .nav-link{
@@ -20,19 +23,23 @@
       border:none;
       font-family:inherit;
       font-weight:700;
-      font-size:0.95rem;
-      padding:10px 20px;
+      font-size:0.9rem;
+      padding:10px 16px;
       border-radius:8px;
       cursor:pointer;
       transition:background-color 0.2s ease, transform 0.1s ease;
     }
     .nav-link:hover{background:#6d161c;transform:translateY(-1px)}
-    .nav-link.active{background:#008C45} /* Highlights green when selected */
+    .nav-link.active{background:#008C45} /* Highlights green when active */
+    
+    /* Home Button Style */
+    .home-btn{
+      display:none; /* Hidden initially, shows when a section is opened */
+      background:#555555;
+    }
+    .home-btn:hover{background:#333333}
 
-    .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
-    header.hero-header{padding:30px 0 20px}
-    .logo-img{max-width:100%;width:380px;height:auto;display:block;margin:0 auto}
-    main{flex:1;padding:20px 0 40px}
+    main{flex:1;padding:10px 0 40px}
     .coming-soon-badge{display:inline-block;background:#008C45;color:#fff;padding:6px 16px;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:50px;margin-bottom:20px}
     .hero-block{margin-bottom:15px}
     .hero-line{font-size:2rem;color:#8D1D24;font-weight:700;margin-bottom:8px}
@@ -53,9 +60,9 @@
       border:1px solid #e6dec9;
       box-shadow:0 4px 10px rgba(0,0,0,.02);
       padding:28px;
-      display:none; /* Hidden by default until clicked */
+      display:none; /* Hidden by default */
     }
-    .story-panel.active-panel{display:block} /* Displays when selected */
+    .story-panel.active-panel{display:block}
     
     .story-subtitle{font-style:italic;color:#666;margin-bottom:20px;font-size:1.05rem}
     .story-divider{border:0;height:1px;background:#e6dec9;margin:20px 0}
@@ -88,17 +95,16 @@
 </head>
 <body>
 
-  <!-- Sticky Top Header Navigation -->
-  <div class="sticky-header">
-    <nav class="nav-container">
-      <button class="nav-link" onclick="toggleSection('story', this)">The Story Of Nonna Lina</button>
-      <button class="nav-link" onclick="toggleSection('promise', this)">The Nonna Lina Promise</button>
-    </nav>
-  </div>
-
   <header class="hero-header">
     <div class="container">
       <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="380" height="380">
+      
+      <!-- Navigation Bar directly under logo -->
+      <nav class="nav-container">
+        <button id="homeBtn" class="nav-link home-btn" onclick="goHome()">🏠 HOME</button>
+        <button class="nav-link" onclick="toggleSection('story', this)">The Story Of Nonna Lina</button>
+        <button class="nav-link" onclick="toggleSection('promise', this)">The Nonna Lina Promise</button>
+      </nav>
     </div>
   </header>
 
@@ -177,28 +183,37 @@
   </footer>
 
   <script>
-    // Show one section at a time (or hide if clicked again)
+    // Toggle Sections
     function toggleSection(sectionId, btnElement) {
       const targetSection = document.getElementById(sectionId);
+      const homeBtn = document.getElementById('homeBtn');
       const isAlreadyActive = targetSection.classList.contains('active-panel');
 
-      // Hide all panels
-      document.querySelectorAll('.story-panel').forEach(panel => {
-        panel.classList.remove('active-panel');
-      });
+      // Reset panels and button states
+      resetView();
 
-      // Reset button styles
-      document.querySelectorAll('.nav-link').forEach(btn => {
-        btn.classList.remove('active');
-      });
-
-      // If it wasn't active before, show it now and highlight the button
       if (!isAlreadyActive) {
         targetSection.classList.add('active-panel');
         btnElement.classList.add('active');
+        homeBtn.style.display = 'inline-block'; // Reveal HOME button when section opens
         
-        // Smooth scroll to the newly revealed content
         targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // Reset back to main view (Home)
+    function goHome() {
+      resetView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetView() {
+      document.querySelectorAll('.story-panel').forEach(panel => panel.classList.remove('active-panel'));
+      document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('homeBtn').style.display = 'none'; // Hide HOME button on main view
+      
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.pathname);
       }
     }
 
@@ -227,3 +242,8 @@
   </script>
 </body>
 </html>
+
+What this update achieves:
+⚬ Logo Integration: The menu buttons sit directly beneath the main logo image.
+⚬ Smart HOME Button: The 🏠 HOME button remains hidden initially to keep the clean main look, and dynamically appears as soon as a visitor opens either The Story or The Promise section.
+⚬ One-Click Reset: Clicking HOME closes all content panels, hides the HOME button, and smoothly scrolls the user back to the top of the page.
