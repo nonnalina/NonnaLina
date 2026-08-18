@@ -17,26 +17,26 @@
       top:0;
       z-index:1000;
       background:#fbf9f3;
-      padding:15px 0 10px;
+      padding:12px 0 8px;
       border-bottom:1px solid #e6dec9;
       box-shadow:0 2px 8px rgba(0,0,0,0.04);
     }
     
-    .logo-img{max-width:100%;width:260px;height:auto;display:block;margin:0 auto 10px}
+    .logo-img{max-width:100%;width:240px;height:auto;display:block;margin:0 auto 8px}
     
     /* Navigation Bar */
-    .nav-container{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+    .nav-container{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
     
-    /* Navigation Link Buttons */
+    /* Compact Navigation Link Buttons */
     .nav-link{
       background:#8D1D24;
       color:#ffffff;
       border:none;
       font-family:inherit;
       font-weight:700;
-      font-size:0.85rem;
-      padding:8px 14px;
-      border-radius:8px;
+      font-size:0.8rem;
+      padding:6px 12px;
+      border-radius:6px;
       cursor:pointer;
       transition:background-color 0.2s ease, transform 0.1s ease;
     }
@@ -50,7 +50,7 @@
     }
     .home-btn:hover{background:#333333}
 
-    main{flex:1;padding:30px 0 40px}
+    main{flex:1;padding:25px 0 40px}
     .coming-soon-badge{display:inline-block;background:#008C45;color:#fff;padding:6px 16px;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:50px;margin-bottom:20px}
     .hero-block{margin-bottom:15px}
     .hero-line{font-size:2rem;color:#8D1D24;font-weight:700;margin-bottom:8px}
@@ -97,24 +97,24 @@
     footer{padding:20px 0;text-align:center;font-size:0.9rem;color:#777;border-top:1px solid #e6dec9}
 
     @media(max-width:640px){
-      .logo-img{width:200px}
+      .logo-img{width:190px}
       .subhead{font-size:16px}
-      .nav-link{font-size:0.8rem;padding:7px 10px}
+      .nav-link{font-size:0.75rem;padding:5px 9px}
       .story-panel{padding:20px}
     }
   </style>
 </head>
 <body>
 
-  <!-- Sticky Header containing both Logo and Navigation -->
+  <!-- Sticky Header containing Logo and Compact Navigation -->
   <header class="hero-header">
     <div class="container">
-      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="260" height="260">
+      <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="240" height="240">
       
       <nav class="nav-container">
         <button id="homeBtn" class="nav-link home-btn" onclick="goHome()">🏠 HOME</button>
-        <button class="nav-link" onclick="toggleSection('story', this)">The Story Of Nonna Lina</button>
-        <button class="nav-link" onclick="toggleSection('promise', this)">The Nonna Lina Promise</button>
+        <button class="nav-link" onclick="toggleSection('story', this)">Our Story</button>
+        <button class="nav-link" onclick="toggleSection('promise', this)">Our Promise</button>
       </nav>
     </div>
   </header>
