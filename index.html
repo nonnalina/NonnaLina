@@ -12,8 +12,22 @@
     /* Sticky Top Navigation Bar */
     .sticky-header{position:sticky;top:0;z-index:1000;background:#fbf9f3;padding:12px 15px;border-bottom:1px solid #e6dec9;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
     .nav-container{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;max-width:700px;margin:0 auto}
-    .nav-link{background:#8D1D24;color:#ffffff;text-decoration:none;font-weight:700;font-size:0.95rem;padding:9px 18px;border-radius:8px;transition:background-color 0.2s ease, transform 0.1s ease}
+    
+    /* Navigation Link Buttons */
+    .nav-link{
+      background:#8D1D24;
+      color:#ffffff;
+      border:none;
+      font-family:inherit;
+      font-weight:700;
+      font-size:0.95rem;
+      padding:10px 20px;
+      border-radius:8px;
+      cursor:pointer;
+      transition:background-color 0.2s ease, transform 0.1s ease;
+    }
     .nav-link:hover{background:#6d161c;transform:translateY(-1px)}
+    .nav-link.active{background:#008C45} /* Highlights green when selected */
 
     .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
     header.hero-header{padding:30px 0 20px}
@@ -31,9 +45,18 @@
     .menu-preview h2{font-size:1.3rem;color:#008C45;margin-bottom:15px;text-transform:uppercase;letter-spacing:1px}
     .menu-items{font-size:1.1rem;color:#555;line-height:1.8}
 
-    /* Full Content Sections */
-    .story-container{margin-bottom:35px;text-align:left;display:flex;flex-direction:column;gap:30px}
-    .story-panel{background:#fff;border-radius:12px;border:1px solid #e6dec9;box-shadow:0 4px 10px rgba(0,0,0,.02);padding:28px}
+    /* Interactive Content Sections */
+    .story-container{margin-bottom:35px;text-align:left}
+    .story-panel{
+      background:#fff;
+      border-radius:12px;
+      border:1px solid #e6dec9;
+      box-shadow:0 4px 10px rgba(0,0,0,.02);
+      padding:28px;
+      display:none; /* Hidden by default until clicked */
+    }
+    .story-panel.active-panel{display:block} /* Displays when selected */
+    
     .story-subtitle{font-style:italic;color:#666;margin-bottom:20px;font-size:1.05rem}
     .story-divider{border:0;height:1px;background:#e6dec9;margin:20px 0}
     .story-body p{margin-bottom:18px;font-size:1.05rem;color:#333;line-height:1.7}
@@ -68,8 +91,8 @@
   <!-- Sticky Top Header Navigation -->
   <div class="sticky-header">
     <nav class="nav-container">
-      <a href="#story" class="nav-link">The Story Of Nonna Lina</a>
-      <a href="#promise" class="nav-link">The Nonna Lina Promise</a>
+      <button class="nav-link" onclick="toggleSection('story', this)">The Story Of Nonna Lina</button>
+      <button class="nav-link" onclick="toggleSection('promise', this)">The Nonna Lina Promise</button>
     </nav>
   </div>
 
@@ -154,6 +177,31 @@
   </footer>
 
   <script>
+    // Show one section at a time (or hide if clicked again)
+    function toggleSection(sectionId, btnElement) {
+      const targetSection = document.getElementById(sectionId);
+      const isAlreadyActive = targetSection.classList.contains('active-panel');
+
+      // Hide all panels
+      document.querySelectorAll('.story-panel').forEach(panel => {
+        panel.classList.remove('active-panel');
+      });
+
+      // Reset button styles
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // If it wasn't active before, show it now and highlight the button
+      if (!isAlreadyActive) {
+        targetSection.classList.add('active-panel');
+        btnElement.classList.add('active');
+        
+        // Smooth scroll to the newly revealed content
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
     // Auto-shrink subhead script
     (function autoShrinkToFit(){
       const el = document.getElementById('autoSubhead');
