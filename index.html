@@ -194,7 +194,7 @@
   </footer>
 
   <script>
-    // Toggle Sections
+    // Toggle Sections (Dynamic Header Offset)
     function toggleSection(sectionId, btnElement) {
       const targetSection = document.getElementById(sectionId);
       const homeBtn = document.getElementById('homeBtn');
@@ -207,10 +207,11 @@
         btnElement.classList.add('active');
         homeBtn.style.display = 'inline-block';
         
-        // Scroll smoothly to section content below the sticky header
-        const headerOffset = 180;
+        // Dynamically calculate header height + 15px extra space
+        const header = document.querySelector('header.hero-header');
+        const headerHeight = header ? header.offsetHeight : 0;
         const elementPosition = targetSection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 15;
 
         window.scrollTo({
           top: offsetPosition,
