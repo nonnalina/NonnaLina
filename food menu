@@ -1,1 +1,87 @@
+<div class="story-body">
+  <p class="story-subtitle" style="text-align: center; margin-bottom: 25px;">Authentic Italian • Scratch Kitchen</p>
 
+  <!-- BUILD YOUR PASTA BOX -->
+  <div style="background: #fdfbf7; border: 2px solid #8D1D24; border-radius: 10px; padding: 20px; margin-bottom: 30px;">
+    <h3 style="color: #8D1D24; text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Build Your Own Pasta</h3>
+    <p style="text-align: center; color: #666; font-size: 0.95rem; margin-bottom: 20px;">Choose 1 Pasta + 1 Sauce, then add your favorite toppings!</p>
+
+    <!-- STEP 1: PASTA & SAUCE -->
+    <div style="border-bottom: 1px dashed #e6dec9; padding-bottom: 15px; margin-bottom: 15px;">
+      <h4 style="color: #008C45; font-size: 1.1rem; margin-bottom: 10px;">STEP 1: Choose Your Pasta &amp; Sauce</h4>
+      
+      <p style="margin-bottom: 8px;"><strong>Pastas:</strong> Spaghetti • Fettuccine • Caserecce • Penne</p>
+      
+      <p style="margin-bottom: 6px;"><strong>Sauces:</strong></p>
+      <ul style="list-style: none; padding-left: 10px; font-size: 0.95rem; color: #444; line-height: 1.6;">
+        <li>• <strong>Alfredo:</strong> Heavy Cream, Parmigiano Reggiano, Butter</li>
+        <li>• <strong>Marinara:</strong> San Marzano Tomatoes, EVOO, Garlic, Onion, Oregano, Basil</li>
+        <li>• <strong>Salsa Rosa:</strong> Our Marinara with Heavy Cream</li>
+        <li>• <strong>Bolognese:</strong> Simmered 100% Ground Beef, Tomatoes, EVOO, Garlic, mirepoix</li>
+        <li>• <strong>Nonna Lina:</strong> Our Bolognese with béchamel (white smooth sauce)</li>
+        <li>• <strong>Aglio &amp; Olio:</strong> EVOO &amp; Garlic</li>
+      </ul>
+    </div>
+
+    <!-- STEP 2: TOPPINGS -->
+    <div>
+      <h4 style="color: #008C45; font-size: 1.1rem; margin-bottom: 10px;">STEP 2: Add Toppings <span style="font-size: 0.85rem; color: #777; font-weight: normal;">(Additional Charge)</span></h4>
+      
+      <p style="margin-bottom: 6px;"><strong>Proteins:</strong></p>
+      <ul style="list-style: none; padding-left: 10px; font-size: 0.95rem; color: #444; margin-bottom: 12px; line-height: 1.6;">
+        <li>• <strong>Shrimp:</strong> Sauteed in EVOO with Garlic &amp; Parsley</li>
+        <li>• <strong>Sausage:</strong> Ground pork sausages sauteed in EVOO with Garlic</li>
+        <li>• <strong>Chicken:</strong> Sauteed in EVOO with Garlic, and Rosemary</li>
+        <li>• <strong>Meatballs:</strong> 100% Ground Beef</li>
+      </ul>
+
+      <p style="margin-bottom: 6px;"><strong>Veggies:</strong></p>
+      <ul style="list-style: none; padding-left: 10px; font-size: 0.95rem; color: #444; margin-bottom: 12px; line-height: 1.6;">
+        <li>• <strong>Broccoli:</strong> Sauteed in EVOO with Garlic</li>
+        <li>• <strong>Spinach:</strong> Sauteed in EVOO with Garlic</li>
+        <li>• <strong>Mushrooms:</strong> Sauteed in EVOO with Garlic and Parsley</li>
+        <li>• <strong>Fresh Diced Tomatoes</strong></li>
+      </ul>
+
+      <p style="margin-bottom: 6px;"><strong>Cheeses:</strong></p>
+      <p style="padding-left: 10px; font-size: 0.95rem; color: #444;">• Parmigiano Reggiano &nbsp;• Fresh Mozzarella</p>
+    </div>
+  </div>
+
+  <hr class="story-divider">
+
+  <!-- OTHER MENU CATEGORIES -->
+  <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Sicilian Pizza</h3>
+      <p style="color: #555; font-size: 0.95rem;">Authentic thick-crust Sicilian style pizza by the slice.</p>
+    </div>
+
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Lasagna</h3>
+      <p style="color: #555; font-size: 0.95rem;">Traditional Nonna Lina house-made layered lasagna.</p>
+    </div>
+
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Gourmet Panini</h3>
+      <p style="color: #555; font-size: 0.95rem;">Freshly pressed Italian sandwiches made with quality meats &amp; cheeses.</p>
+    </div>
+
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Soups &amp; Sides</h3>
+      <p style="color: #555; font-size: 0.95rem;">Garlic Bread Bites • Pasta e Fagioli Soup</p>
+    </div>
+
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Salads</h3>
+      <p style="color: #555; font-size: 0.95rem;">Crisp, fresh garden salads with signature Italian dressings.</p>
+    </div>
+
+    <div>
+      <h3 style="color: #8D1D24; font-size: 1.15rem; margin-bottom: 5px;">Desserts</h3>
+      <p style="color: #555; font-size: 0.95rem;">Classic Sicilian Cannoli • Refreshing Granita</p>
+    </div>
+  </div>
+
+  <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+</div>
