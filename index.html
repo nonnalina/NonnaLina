@@ -226,20 +226,25 @@
       }
     }
 
-    // Helper function to slide open panel and execute smooth scroll
+    // Helper function to slide open panel and execute smooth scroll past Specialties
     function openPanel(targetSection, btnElement, homeBtn) {
       targetSection.classList.add('active-panel');
       btnElement.classList.add('active');
       homeBtn.style.display = 'inline-block';
       
-      const header = document.querySelector('header.hero-header');
-      const headerHeight = header ? header.offsetHeight : 0;
-      const elementPosition = targetSection.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 15;
+      // RequestAnimationFrame ensures DOM layout is updated before scrolling
+      requestAnimationFrame(() => {
+        const header = document.querySelector('header.hero-header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        // Calculate offset directly from the active section panel
+        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight - 15;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       });
     }
 
