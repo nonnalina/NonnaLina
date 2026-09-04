@@ -1,32 +1,300 @@
-<section id="promise" class="story-panel">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nonna Lina | Cucina Italiana</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:#2b2b2b;background:#fbf9f3;display:flex;flex-direction:column;min-height:100vh}
+    
+    .container{width:90%;max-width:700px;margin:0 auto;text-align:center}
+    
+    /* Sticky Header Container */
+    header.hero-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#fbf9f3;
+      padding:12px 0 8px;
+      border-bottom:1px solid #e6dec9;
+      box-shadow:0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .logo-img{max-width:100%;width:240px;height:auto;display:block;margin:0 auto 8px}
+    
+    /* Navigation Bar */
+    .nav-container{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+    
+    /* Compact Navigation Link Buttons */
+    .nav-link{
+      background:#8D1D24;
+      color:#ffffff;
+      border:none;
+      font-family:inherit;
+      font-weight:700;
+      font-size:0.8rem;
+      padding:6px 12px;
+      border-radius:6px;
+      cursor:pointer;
+      transition:background-color 0.2s ease, transform 0.1s ease;
+    }
+    .nav-link:hover{background:#6d161c;transform:translateY(-1px)}
+    .nav-link.active{background:#008C45} /* Highlights green when active */
+    
+    /* Home Button Style */
+    .home-btn{
+      display:none; /* Hidden initially, shows when a section is opened */
+      background:#555555;
+    }
+    .home-btn:hover{background:#333333}
 
-  <div class="card-block">
-    <strong class="card-title">Quality First</strong>
-    We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach, and broccoli—to ensure authentic flavor.
-  </div>
+    main{flex:1;padding:25px 0 40px}
+    .coming-soon-badge{display:inline-block;background:#008C45;color:#fff;padding:6px 16px;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:50px;margin-bottom:20px}
+    .hero-block{margin-bottom:15px}
+    .hero-line{font-size:2rem;color:#8D1D24;font-weight:700;margin-bottom:8px}
+    .auto-subhead-wrap{width:100%;display:block}
+    .subhead{font-size:20px;line-height:1;margin:0 0 14px 0;white-space:nowrap;overflow:hidden;text-overflow:clip;display:inline-block;font-weight:500;color:#8D1D24;max-width:100%}
+    .description-text{font-size:1.1rem;color:#4a4a4a;margin-bottom:30px}
+    
+    /* Specialties Card */
+    .menu-preview{background:#fff;padding:25px;border-radius:12px;border:1px solid #e6dec9;margin-bottom:30px;box-shadow:0 4px 10px rgba(0,0,0,.02)}
+    .menu-preview h2{font-size:1.3rem;color:#008C45;margin-bottom:15px;text-transform:uppercase;letter-spacing:1px}
+    .menu-items{font-size:1.1rem;color:#555;line-height:1.8}
 
-  <div class="card-block">
-    <strong class="card-title">Simple Recipes</strong>
-    Our sauces (Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese, and Aglio &amp; Olio) are straightforward and crafted to showcase those fresh ingredients.
-  </div>
+    /* Interactive Content Sections */
+    .story-container{margin-bottom:35px;text-align:left}
+    .story-panel{
+      background:transparent;
+      display:none; /* Hidden by default */
+    }
+    .story-panel.active-panel{display:block}
+    
+    /* Card Styles for Interactive Panels */
+    .card-block{
+      margin:0 0 12px 0;
+      padding:16px;
+      border-radius:8px;
+      background:#fff;
+      border:1px solid #e6dec9;
+      box-shadow:0 6px 14px rgba(20,20,20,0.03);
+    }
+    .card-block strong.card-title{
+      color:#8b2e18;
+      display:block;
+      margin-bottom:6px;
+      font-size:1.05rem;
+    }
+    .card-block.center-text{text-align:center}
+    .card-block.bold-text{font-weight:600}
 
-  <div class="card-block">
-    <strong class="card-title">Customizable Plates</strong>
-    Choose a pasta and pair it with fresh proteins and vegetables for a satisfying, familiar meal made to order.
-  </div>
+    .story-subtitle{font-style:italic;color:#666;margin-bottom:20px;font-size:1.05rem}
+    .story-divider{border:0;height:1px;background:#e6dec9;margin:20px 0}
+    .story-body p{margin-bottom:18px;font-size:1.05rem;color:#333;line-height:1.7}
+    .story-body blockquote{font-style:italic;border-left:3px solid #008C45;margin:25px 0;padding-left:15px;color:#555}
+    .story-highlight{font-size:1.25rem;margin:25px 0;color:#222}
+    .story-slogan{font-weight:700;color:#8D1D24;margin-top:20px;padding-top:15px;font-size:1.1rem;text-align:center}
 
-  <div class="card-block">
-    <strong class="card-title">Italian Favorites</strong>
-    We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli, fresh salads, and classic desserts like cannoli and granita.
-  </div>
+    /* Contact Card */
+    .contact-card{background:#fff;border-radius:12px;border:1px solid #e6dec9;padding:24px;box-shadow:0 4px 10px rgba(0,0,0,.02);margin-top:10px}
+    .contact-card h3{font-size:1.25rem;color:#8D1D24;margin-bottom:4px}
+    .contact-card .title-sub{color:#666;font-size:0.95rem;margin-bottom:12px}
+    .contact-item{margin:6px 0;font-size:1.05rem}
+    .contact-item a{color:#008C45;text-decoration:none;font-weight:600}
+    .contact-item a:hover{text-decoration:underline}
 
-  <div class="card-block">
-    <strong class="card-title">Warm Hospitality</strong>
-    We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.
-  </div>
+    footer{padding:20px 0;text-align:center;font-size:0.9rem;color:#777;border-top:1px solid #e6dec9}
 
-  <div class="card-block center-text bold-text" style="color: #8D1D24;">
-    “Great food doesn’t need to be complicated — Just real.”
-  </div>
+    @media(max-width:640px){
+      .logo-img{width:190px}
+      .subhead{font-size:16px}
+      .nav-link{font-size:0.75rem;padding:5px 9px}
+      .card-block{padding:12px}
+    }
+  </style>
+</head>
+<body>
 
-</section>
+  <!-- Sticky Header Container containing Logo and Compact Navigation -->
+  <header class="hero-header">
+    <div class="container">
+      <img src="Horizontal-Transparent.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="240" height="240">
+      
+      <nav class="nav-container">
+        <button id="homeBtn" class="nav-link home-btn" onclick="goHome()">🏠 HOME</button>
+        <button class="nav-link" onclick="toggleSection('story', this)">Our Story</button>
+        <button class="nav-link" onclick="toggleSection('promise', this)">Our Promise</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="coming-soon-badge" aria-hidden="true">Opening Soon · Central Florida</div>
+
+      <div class="hero-block" role="heading" aria-level="1">
+        <div class="hero-line">A Taste of Italy is on the Way</div>
+        <div class="auto-subhead-wrap" aria-hidden="false">
+          <div id="autoSubhead" class="subhead" role="text" aria-label="Tagline">
+            “Great food doesn’t need to be complicated — Just real.”
+          </div>
+        </div>
+      </div>
+
+      <p class="description-text">Get ready for a fast-casual, counter-service Italian experience featuring a made-from-scratch kitchen.</p>
+
+      <div class="menu-preview" role="region" aria-labelledby="menuTitle">
+        <h2 id="menuTitle">Our Specialties</h2>
+        <p class="menu-items" aria-label="Menu items list">
+          Delicious Pasta • Authentic Lasagna • Sicilian Style Pizza by the Slice<br>
+          Fresh Salads • Gourmet Panini • Sicilian Cannoli
+        </p>
+      </div>
+
+      <div class="story-container">
+        <!-- Story Section -->
+        <section id="story" class="story-panel">
+          <div class="card-block story-body" style="padding:28px;">
+            <p class="story-subtitle">"NONNA LINA - Cucina Italiana" was born from love, memory, and tradition.</p>
+            <hr class="story-divider">
+            <p>Orsolina Pampalone—affectionately known as Nonna Lina—was born in 1935 in the small village of Custonaci, in the province of Trapani, Sicily. A devoted wife, she was married and raised three sons, filling her home with warmth, discipline, and the unmistakable aroma of freshly made food.</p>
+            <p>Nonna Lina wasn’t a professional chef—she was something far greater. She cooked every day, from scratch, the way Sicilian mothers have for generations. Her kitchen was a place where simple ingredients became unforgettable meals, where pasta was rolled by hand, sauces simmered slowly, and food was an act of love.</p>
+            <p>Her youngest son, graduated in 1985 from the "Istituto Professionale Alberghiero di Stato" in Erice, and immediately began his journey in the food industry. His career took him across Italy, Switzerland, England and Bermuda, before eventually bringing him to Orlando in 1994. For decades, he worked exclusively in the food industry, refining his skills, learning different cuisines, and mastering operations—never forgetting where it all began: his mother’s kitchen.</p>
+            <blockquote>In 2023, Nonna Lina passed away, leaving behind a legacy that could never be forgotten.</blockquote>
+            <p>Naming the restaurant Nonna Lina was a family decision—made by her son with his wife, and their three children —to honor a woman who shaped not only their family, but their way of cooking, eating, and living.</p>
+            <p class="story-highlight">This is more than a restaurant. <br><strong>It is a tribute.</strong></p>
+            <p>At Nonna Lina, we bring traditional Italian recipes into a modern, scratch-made fast-casual experience—imported pasta, quality ingredients, and flavors that tell a story. Every dish is inspired by Nonna Lina’s recipes, prepared with the same care, simplicity, and respect she showed every day in her home.</p>
+            <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
+          </div>
+        </section>
+
+        <!-- Promise Section (Card Layout) -->
+        <section id="promise" class="story-panel">
+          <div class="card-block center-text bold-text">
+            At NONNA LINA · Cucina Italiana
+          </div>
+
+          <div class="card-block">
+            We bring classic Italian comfort to every plate.
+          </div>
+
+          <div class="card-block">
+            <strong class="card-title">Simple recipes</strong>
+            Simple recipes. Quality ingredients. Familiar flavors.
+          </div>
+
+          <div class="card-block">
+           <strong class="card-title">Quality first:</strong>
+            We use imported pasta and premium ingredients—Parmigiano, fresh mozzarella, ripe tomatoes, mushrooms, spinach and broccoli—to ensure authentic flavor.
+          </div>
+
+          <div class="card-block">
+            <strong class="card-title">Simple recipes</strong>
+            Our sauces: Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese and Aglio &amp; Olio are straightforward and crafted to showcase those ingredients.
+          </div>
+
+          <div class="card-block">
+            <strong class="card-title">Customizable plates</strong>
+            Choose a pasta and pair it with proteins and fresh vegetables for a satisfying, familiar meal.
+          </div>
+
+          <div class="card-block">
+            <strong class="card-title">Italian favorites</strong>
+            We serve Sicilian pizza slices, lasagna Nonna Lina, panini, garlic bread bites, pasta e fagioli and salads, plus classic desserts like cannoli and granita.
+          </div>
+
+          <div class="card-block">
+            <strong class="card-title">Warm hospitality</strong>
+            We treat every guest like family and honor Nonna Lina’s legacy by never cutting corners.
+          </div>
+
+          <div class="card-block center-text bold-text">
+            Great food doesn’t need to be complicated — Just real.
+          </div>
+        </section>
+      </div>
+
+      <div class="contact-card" role="region" aria-labelledby="contactTitle">
+        <h3 id="contactTitle">Francesco D’Angelo</h3>
+        <p class="title-sub">General Manager</p>
+        <div class="contact-item">📞 <a href="tel:+14075369155">407.536.9155</a></div>
+        <div class="contact-item">📧 <a href="mailto:Francesco@NonnaLina.us">Francesco@NonnaLina.us</a></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Nonna Lina Cucina Italiana. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle Sections (Dynamic Header Offset)
+    function toggleSection(sectionId, btnElement) {
+      const targetSection = document.getElementById(sectionId);
+      const homeBtn = document.getElementById('homeBtn');
+      const isAlreadyActive = targetSection.classList.contains('active-panel');
+
+      resetView();
+
+      if (!isAlreadyActive) {
+        targetSection.classList.add('active-panel');
+        btnElement.classList.add('active');
+        homeBtn.style.display = 'inline-block';
+        
+        // Dynamically calculate header height + 15px extra space
+        const header = document.querySelector('header.hero-header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 15;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Reset back to main view (Home)
+    function goHome() {
+      resetView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetView() {
+      document.querySelectorAll('.story-panel').forEach(panel => panel.classList.remove('active-panel'));
+      document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('homeBtn').style.display = 'none';
+      
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.pathname);
+      }
+    }
+
+    // Auto-shrink subhead script
+    (function autoShrinkToFit(){
+      const el = document.getElementById('autoSubhead');
+      if(!el) return;
+      const STYLE_PROP='fontSize';
+      const computed=getComputedStyle(el);
+      let maxSizePx=parseFloat(computed.fontSize)||20;
+      const minSizePx=10; const step=0.5;
+      function setSize(px){ el.style[STYLE_PROP]=px+'px'; }
+      function fits(){ return el.scrollWidth <= el.parentElement.clientWidth; }
+      setSize(maxSizePx);
+      function shrinkStep(){
+        const current=parseFloat(getComputedStyle(el).fontSize);
+        if(fits()||current<=minSizePx){ if(!fits()&&current<=minSizePx)setSize(minSizePx); return; }
+        setSize(Math.max(minSizePx,current-step));
+        requestAnimationFrame(shrinkStep);
+      }
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>requestAnimationFrame(shrinkStep));
+      else requestAnimationFrame(shrinkStep);
+      let resizeTimer;
+      window.addEventListener('resize', ()=>{ clearTimeout(resizeTimer); resizeTimer=setTimeout(()=>{ setSize(maxSizePx); requestAnimationFrame(shrinkStep); },120); });
+    })();
+  </script>
+</body>
+</html>
