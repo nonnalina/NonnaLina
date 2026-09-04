@@ -38,6 +38,8 @@
       padding:6px 12px;
       border-radius:6px;
       cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
       transition:background-color 0.2s ease, transform 0.1s ease;
     }
     .nav-link:hover{background:#6d161c;transform:translateY(-1px)}
@@ -45,7 +47,7 @@
     
     /* Home Button Style */
     .home-btn{
-      display:none; /* Hidden initially, shows when a section is opened */
+      display:none; /* Hidden initially, shows when an interactive section is opened */
       background:#555555;
     }
     .home-btn:hover{background:#333333}
@@ -98,14 +100,15 @@
 </head>
 <body>
 
-  <!-- Sticky Header containing Logo and Compact Navigation -->
+  <!-- Sticky Header Container -->
   <header class="hero-header">
     <div class="container">
       <img src="Square.svg" alt="Nonna Lina Cucina Italiana Logo" class="logo-img" width="240" height="240">
       
       <nav class="nav-container">
         <button id="homeBtn" class="nav-link home-btn" onclick="goHome()">🏠 HOME</button>
-        <button class="nav-link" onclick="toggleSection('menuSection', this)">Menu</button>
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="food-menu.html" class="nav-link">Food Menu</a>
         <button class="nav-link" onclick="toggleSection('story', this)">Our Story</button>
         <button class="nav-link" onclick="toggleSection('promise', this)">Our Promise</button>
         <button class="nav-link" onclick="toggleSection('contactSection', this)">Contact Us</button>
@@ -137,19 +140,6 @@
       </div>
 
       <div class="story-container">
-        <!-- Menu Section -->
-        <section id="menuSection" class="story-panel">
-          <div class="story-body">
-            <p class="story-subtitle">Made-From-Scratch Italian Favorites</p>
-            <hr class="story-divider">
-            <p><strong>Pasta &amp; Lasagna:</strong> Made with imported pasta and slow-simmered sauces including Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese, and Aglio &amp; Olio.</p>
-            <p><strong>Pizza by the Slice:</strong> Authentic Sicilian-style thick crust pizza, topped with fresh ingredients.</p>
-            <p><strong>Gourmet Panini &amp; Sides:</strong> Freshly pressed sandwiches, garlic bread bites, and traditional pasta e fagioli.</p>
-            <p><strong>Salads &amp; Desserts:</strong> Crisp salads, classic Sicilian cannoli, and refreshing granita.</p>
-            <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
-          </div>
-        </section>
-
         <!-- Story Section -->
         <section id="story" class="story-panel">
           <div class="story-body">
