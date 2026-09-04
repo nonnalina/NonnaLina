@@ -226,20 +226,28 @@
       }
     }
 
-    // Helper function to slide open panel and execute smooth scroll past Specialties
+    // Helper function to slide open panel and execute smooth scroll
     function openPanel(targetSection, btnElement, homeBtn) {
       targetSection.classList.add('active-panel');
       btnElement.classList.add('active');
       homeBtn.style.display = 'inline-block';
       
-      // RequestAnimationFrame ensures DOM layout is updated before scrolling
       requestAnimationFrame(() => {
         const header = document.querySelector('header.hero-header');
         const headerHeight = header ? header.offsetHeight : 0;
+        const mainElement = document.querySelector('main');
         
-        // Calculate offset directly from the active section panel
+        // Reset padding to calculate accurate layout height
+        mainElement.style.paddingBottom = '40px';
+
         const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - headerHeight - 15;
+
+        // Ensure enough room exists at page bottom so short panels like Contact Us can scroll all the way up
+        const requiredScrollSpace = offsetPosition + window.innerHeight - document.documentElement.scrollHeight;
+        if (requiredScrollSpace > 0) {
+          mainElement.style.paddingBottom = (40 + requiredScrollSpace + 50) + 'px';
+        }
 
         window.scrollTo({
           top: offsetPosition,
@@ -255,6 +263,9 @@
     }
 
     function resetView() {
+      const mainElement = document.querySelector('main');
+      if (mainElement) mainElement.style.paddingBottom = '40px';
+      
       document.querySelectorAll('.story-panel').forEach(panel => panel.classList.remove('active-panel'));
       document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
       document.getElementById('homeBtn').style.display = 'none';
