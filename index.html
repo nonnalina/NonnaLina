@@ -137,18 +137,8 @@
       </div>
 
       <div class="story-container">
-        <!-- Menu Section -->
-        <section id="menuSection" class="story-panel">
-          <div class="story-body">
-            <p class="story-subtitle">Made-From-Scratch Italian Favorites</p>
-            <hr class="story-divider">
-            <p><strong>Pasta &amp; Lasagna:</strong> Made with imported pasta and slow-simmered sauces including Alfredo, Marinara, Nonna Lina, Salsa Rosa, Bolognese, and Aglio &amp; Olio.</p>
-            <p><strong>Pizza by the Slice:</strong> Authentic Sicilian-style thick crust pizza, topped with fresh ingredients.</p>
-            <p><strong>Gourmet Panini &amp; Sides:</strong> Freshly pressed sandwiches, garlic bread bites, and traditional pasta e fagioli.</p>
-            <p><strong>Salads &amp; Desserts:</strong> Crisp salads, classic Sicilian cannoli, and refreshing granita.</p>
-            <p class="story-slogan">Great food doesn’t need to be complicated — Just real.</p>
-          </div>
-        </section>
+        <!-- Menu Section (Content dynamically loaded from foodmenu.html) -->
+        <section id="menuSection" class="story-panel"></section>
 
         <!-- Story Section -->
         <section id="story" class="story-panel">
@@ -207,7 +197,7 @@
   </footer>
 
   <script>
-    // Toggle Sections (Dynamic Header Offset)
+    // Toggle Sections with dynamic fetch for foodmenu.html
     function toggleSection(sectionId, btnElement) {
       const targetSection = document.getElementById(sectionId);
       const homeBtn = document.getElementById('homeBtn');
@@ -216,21 +206,41 @@
       resetView();
 
       if (!isAlreadyActive) {
-        targetSection.classList.add('active-panel');
-        btnElement.classList.add('active');
-        homeBtn.style.display = 'inline-block';
-        
-        // Dynamically calculate header height + 15px extra space
-        const header = document.querySelector('header.hero-header');
-        const headerHeight = header ? header.offsetHeight : 0;
-        const elementPosition = targetSection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 15;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        if (sectionId === 'menuSection') {
+          fetch('foodmenu.html')
+            .then(response => {
+              if (!response.ok) throw new Error('File not found');
+              return response.text();
+            })
+            .then(data => {
+              targetSection.innerHTML = data;
+              openPanel(targetSection, btnElement, homeBtn);
+            })
+            .catch(err => {
+              console.error('Error loading foodmenu.html:', err);
+              openPanel(targetSection, btnElement, homeBtn);
+            });
+        } else {
+          openPanel(targetSection, btnElement, homeBtn);
+        }
       }
+    }
+
+    // Helper function to slide open panel and execute smooth scroll
+    function openPanel(targetSection, btnElement, homeBtn) {
+      targetSection.classList.add('active-panel');
+      btnElement.classList.add('active');
+      homeBtn.style.display = 'inline-block';
+      
+      const header = document.querySelector('header.hero-header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const elementPosition = targetSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 15;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
 
     // Reset back to main view (Home)
